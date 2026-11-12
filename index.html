@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cupid Moolchandani — Aspiring AI/ML Engineer</title>
+  <meta name="description" content="Personal portfolio of Cupid Moolchandani — aspiring AI/ML engineer, IIT Delhi '26, market analyst at Futures First." />
+  <meta name="author" content="Cupid Moolchandani" />
+  <meta property="og:title" content="Cupid Moolchandani — AI/ML Portfolio" />
+  <meta property="og:description" content="Creative, interactive portfolio of an aspiring AI/ML engineer." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ============ NAV ============ -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-logo" data-text="CM.">CM.</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#playground">Playground</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="sun">☀</span><span class="moon">☾</span>
+      </button>
+      <button class="nav-burger" id="burger" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <main>
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <canvas id="neuralCanvas" aria-hidden="true"></canvas>
+    <div class="hero-content">
+      <div class="hero-badge" id="heroBadge">● Open to opportunities</div>
+      <h1 class="hero-title">
+        Hi, I'm <span class="gradient-text" id="heroName">Cupid</span>.
+      </h1>
+      <p class="hero-sub">
+        <span id="typingText"></span><span class="caret">|</span>
+      </p>
+      <p class="hero-tag" id="heroTag"></p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">See my work →</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num" data-count="1">0</span><span class="stat-label">IIT Delhi '26</span></div>
+        <div class="stat"><span class="stat-num" data-count="2">0</span><span class="stat-label">Domains explored</span></div>
+        <div class="stat"><span class="stat-num" data-count="100">0</span><span class="stat-label">% curiosity</span></div>
+      </div>
+    </div>
+    <div class="scroll-hint">scroll ↓</div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <h2>About me</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p id="aboutText"></p>
+          <div class="edu" id="eduList"></div>
+          <div class="exp" id="expList"></div>
+        </div>
+        <div class="about-cards" id="funFacts"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2>Skills &amp; toolkit</h2>
+      </div>
+      <div class="skills-grid" id="skillsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-num">03</span>
+        <h2>Projects</h2>
+      </div>
+      <div class="projects-grid" id="projectsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============ PLAYGROUND ============ -->
+  <section class="section" id="playground">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <h2>Neural Playground</h2>
+        <p class="section-sub">Drag the sliders — watch a single neuron (and a tiny MLP) compute in real time. This is the kind of thing I love building.</p>
+      </div>
+      <div class="playground-grid">
+        <div class="play-card">
+          <h3>Single neuron</h3>
+          <div class="canvas-wrap"><canvas id="neuronCanvas" width="420" height="260"></canvas></div>
+          <div class="controls">
+            <label>Input x <input type="range" id="nX" min="-3" max="3" step="0.1" value="1.2"><span id="nXv">1.2</span></label>
+            <label>Weight w <input type="range" id="nW" min="-3" max="3" step="0.1" value="1.0"><span id="nWv">1.0</span></label>
+            <label>Bias b <input type="range" id="nB" min="-3" max="3" step="0.1" value="0.0"><span id="nBv">0.0</span></label>
+            <div class="readout">
+              z = w·x + b = <b id="nZ">0.00</b><br>
+              σ(z) = <b id="nOut">0.00</b>
+            </div>
+          </div>
+        </div>
+        <div class="play-card">
+          <h3>Tiny MLP (2-3-1)</h3>
+          <div class="canvas-wrap"><canvas id="mlpCanvas" width="420" height="260"></canvas></div>
+          <div class="controls">
+            <label>Input x₁ <input type="range" id="mX1" min="-2" max="2" step="0.1" value="0.8"><span id="mX1v">0.8</span></label>
+            <label>Input x₂ <input type="range" id="mX2" min="-2" max="2" step="0.1" value="-0.4"><span id="mX2v">-0.4</span></label>
+            <div class="readout">
+              Hidden: <b id="mH">—</b><br>
+              Output σ(·) = <b id="mOut">0.00</b>
+            </div>
+            <button class="btn btn-ghost small" id="randomizeWeights">Randomize weights</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-num">05</span>
+        <h2>Let's connect</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p>Whether it's an ML role, a collab, or just a chat about models &amp; markets — my inbox is open.</p>
+          <div class="contact-links" id="contactLinks"></div>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <input type="text" name="name" placeholder="Your name" required />
+          <input type="email" name="email" placeholder="Your email" required />
+          <textarea name="message" rows="4" placeholder="Your message" required></textarea>
+          <button type="submit" class="btn btn-primary">Send message →</button>
+          <p class="form-note" id="formNote"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  </main>
+  <footer class="footer">
+    <p>Built with ♥ by <span id="footerName"></span> · <span id="year"></span> · Hosted free on GitHub Pages</p>
+    <p class="footer-sub">Designed &amp; coded from scratch — no templates.</p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
