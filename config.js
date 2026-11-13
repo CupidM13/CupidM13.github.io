@@ -27,7 +27,7 @@ window.SITE = {
       degree: "Bachelor of Technology — Biotechnology & Biochemical Engineering",
       years: "Oct 2022 – May 2026",
       grade: "7.35 / 10",
-      activities: "Chess, Running, OCS, Drama",
+      activities: "Chess, Running, OCS",
       coursework: ["Data Structures and Algorithms", "Calculus", "Differential Equations", "Linear Algebra", "Macroeconomics", "Bioinformatics"],
       note: "57th Convocation, 2026"
     }
@@ -81,6 +81,6 @@ window.SITE = {
     "Ex-quant @ Futures First 📊",
     "2000+ YouTube subs 🎬",
     "Believes every dataset has a story 📖",
-    "Chess, running & drama 🏃"
+    "Chess & running 🏃"
   ]
 };
