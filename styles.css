@@ -380,6 +380,16 @@ body::after {
 .reaction-box.go { background: var(--accent-3); color: #0a0b14; }
 .reaction-box.wait { background: #ff6b6b; color: #fff; }
 .snake-score { font-family: var(--font-mono); font-size: 16px; color: var(--accent-3); }
+/* ---- snake D-pad (mobile) ---- */
+.dpad { display: grid; grid-template-columns: repeat(3, 52px); gap: 6px; margin: 12px auto; width: fit-content; }
+.dpad-btn {
+  width: 52px; height: 52px; border-radius: 12px; border: 1px solid var(--border);
+  background: var(--bg-soft); color: var(--fg); font-size: 20px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; user-select: none;
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+}
+.dpad-btn:active { background: var(--accent); color: #fff; transform: scale(0.95); }
+@media (min-width: 768px) { .dpad { display: none; } }
 
 /* ---- konami overlay ---- */
 .konami-overlay {

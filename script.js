@@ -476,12 +476,17 @@ loadGame('snake');
 function initSnake() {
   gameStage.innerHTML = `
     <h3>Snake</h3>
-    <p class="game-info">Use arrow keys / WASD. Eat the food, don't hit walls or yourself.</p>
+    <p class="game-info">Arrow keys / WASD on desktop. Swipe or use the D-pad on mobile.</p>
     <div class="game-row">
       <span class="snake-score">Score: <span id="snakeScore">0</span></span>
       <button class="game-btn primary" id="snakeStart">Start / Restart</button>
     </div>
     <canvas id="snakeCanvas" class="game-canvas" width="360" height="360"></canvas>
+    <div class="dpad" id="snakeDpad">
+      <div></div><button class="dpad-btn" data-dir="up">▲</button><div></div>
+      <button class="dpad-btn" data-dir="left">◀</button><div></div><button class="dpad-btn" data-dir="right">▶</button>
+      <div></div><button class="dpad-btn" data-dir="down">▼</button><div></div>
+    </div>
   `;
   const canvas = document.getElementById('snakeCanvas');
   const ctx = canvas.getContext('2d');
@@ -530,6 +535,32 @@ function initSnake() {
   function start() { reset(); draw(); if (loop) clearInterval(loop); running = true; loop = setInterval(step, 120); }
   document.getElementById('snakeStart').addEventListener('click', start);
   window.addEventListener('keydown', snakeKey);
+  // D-pad (mobile)
+  const dpadMap = { up: {x:0,y:-1}, down: {x:0,y:1}, left: {x:-1,y:0}, right: {x:1,y:0} };
+  document.querySelectorAll('#snakeDpad .dpad-btn').forEach(btn => {
+    const handler = (e) => {
+      e.preventDefault();
+      if (!running) return;
+      const nd = dpadMap[btn.dataset.dir];
+      if (nd && !(nd.x === -dir.x && nd.y === -dir.y)) dir = nd;
+    };
+    btn.addEventListener('touchstart', handler, { passive: false });
+    btn.addEventListener('click', handler);
+  });
+  // Swipe on canvas
+  let touchStart = null;
+  canvas.addEventListener('touchstart', (e) => { const t = e.touches[0]; touchStart = { x: t.clientX, y: t.clientY }; e.preventDefault(); }, { passive: false });
+  canvas.addEventListener('touchend', (e) => {
+    if (!touchStart || !running) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStart.x, dy = t.clientY - touchStart.y;
+    if (Math.abs(dx) < 20 && Math.abs(dy) < 20) return;
+    let nd;
+    if (Math.abs(dx) > Math.abs(dy)) nd = dx > 0 ? {x:1,y:0} : {x:-1,y:0};
+    else nd = dy > 0 ? {x:0,y:1} : {x:0,y:-1};
+    if (!(nd.x === -dir.x && nd.y === -dir.y)) dir = nd;
+    touchStart = null;
+  }, { passive: false });
   function snakeKey(e) {
     if (!running || activeGame !== 'snake') return;
     const map = { ArrowUp:{x:0,y:-1}, ArrowDown:{x:0,y:1}, ArrowLeft:{x:-1,y:0}, ArrowRight:{x:1,y:0},
