@@ -19,7 +19,7 @@ window.SITE = {
     resume: ""     // link to a PDF resume (optional)
   },
 
-  about: "I'm Cupid — a B.Tech (Biotechnology & Biochemical Engineering) student at IIT Delhi (Class of 2026, grade 7.35/10). I've worked as an Energy Market Analyst at Futures First, a Laboratory Teaching Assistant at IIT Delhi, and an educational content creator on YouTube (2000+ subscribers). I'm pivoting into AI/ML engineering because I'm fascinated by how raw data becomes reasoning — and I love blending quantitative trading, teaching, and building things that feel a little bit magical.",
+  about: "I'm Cupid — a B.Tech (Biotechnology & Biochemical Engineering) graduate from IIT Delhi (Class of 2026, grade 7.35/10). I've worked as an Energy Market Analyst at Futures First, a Laboratory Teaching Assistant at IIT Delhi, and an educational content creator on YouTube (2000+ subscribers). I'm pivoting into AI/ML engineering because I'm fascinated by how raw data becomes reasoning — and I love blending quantitative trading, teaching, and building things that feel a little bit magical.",
 
   education: [
     {
@@ -81,6 +81,6 @@ window.SITE = {
     "Ex-quant @ Futures First 📊",
     "2000+ YouTube subs 🎬",
     "Believes every dataset has a story 📖",
-    "Coffee + code = happiness ☕"
+    "Chess, running & drama 🏃"
   ]
 };
