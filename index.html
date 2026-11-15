@@ -4,196 +4,209 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cupid Moolchandani — Aspiring AI/ML Engineer</title>
-  <meta name="description" content="Personal portfolio of Cupid Moolchandani — aspiring AI/ML engineer, IIT Delhi '26, market analyst at Futures First." />
+  <meta name="description" content="Cupid Moolchandani — aspiring AI/ML engineer from IIT Delhi, with a background in energy markets and teaching." />
   <meta name="author" content="Cupid Moolchandani" />
-  <meta property="og:title" content="Cupid Moolchandani — AI/ML Portfolio" />
-  <meta property="og:description" content="Creative, interactive portfolio of an aspiring AI/ML engineer." />
+  <meta property="og:title" content="Cupid Moolchandani — AI/ML Engineer" />
+  <meta property="og:description" content="Aspiring AI/ML engineer from IIT Delhi. Data, markets, models and a few interactive experiments." />
   <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0b0b0c" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=20261116-9" />
+  <script>
+    try {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  </script>
 </head>
 <body>
-  <!-- scroll progress -->
-  <div class="scroll-progress" id="scrollProgress"></div>
-  <!-- custom cursor -->
-  <div class="cursor-dot" id="cursorDot"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
-  <!-- ============ NAV ============ -->
-  <nav class="nav" id="nav">
-    <a href="#hero" class="nav-logo" data-text="CM.">CM.</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#playground">Playground</a></li>
-      <li><a href="#games">Games</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="nav-actions">
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-        <span class="sun">☀</span><span class="moon">☾</span>
-      </button>
-      <button class="nav-burger" id="burger" aria-label="Menu">☰</button>
-    </div>
-  </nav>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <main>
-  <!-- ============ HERO ============ -->
-  <section class="hero" id="hero">
-    <canvas id="neuralCanvas" aria-hidden="true"></canvas>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
   <canvas id="matrixCanvas" aria-hidden="true"></canvas>
-    <div class="hero-content">
-      <div class="hero-badge" id="heroBadge">● Open to opportunities</div>
-      <h1 class="hero-title">
-        Hi, I'm <span class="gradient-text" id="heroName">Cupid</span>.
-      </h1>
-      <p class="hero-sub">
-        <span id="typingText"></span><span class="caret">|</span>
-      </p>
-      <p class="hero-tag" id="heroTag"></p>
-      <div class="hero-cta">
-        <a href="#projects" class="btn btn-primary">See my work →</a>
-        <a href="#contact" class="btn btn-ghost">Get in touch</a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat"><span class="stat-num" data-count="1">0</span><span class="stat-label">IIT Delhi '26</span></div>
-        <div class="stat"><span class="stat-num" data-count="2">0</span><span class="stat-label">Domains explored</span></div>
-        <div class="stat"><span class="stat-num" data-count="100">0</span><span class="stat-label">% curiosity</span></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="brand" aria-label="Back to top">
+        <span class="brand-mark" id="brandMark">CM</span>
+        <span class="brand-text">
+          <strong id="brandName">Cupid Moolchandani</strong>
+          <span>AI / ML Engineer</span>
+        </span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Primary">
+        <a href="#background"><span>01</span>Background</a>
+        <a href="#games"><span>02</span>Arcade</a>
+        <a href="#contact"><span>03</span>Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <span class="nav-status" data-availability><i aria-hidden="true"></i>Open to work</span>
+        <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Switch to light theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+          </svg>
+        </button>
+        <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+          <span></span><span></span>
+        </button>
       </div>
     </div>
-    <div class="scroll-hint">scroll ↓</div>
-  </section>
+  </header>
 
-  <!-- ============ ABOUT ============ -->
-  <section class="section" id="about">
-    <div class="container">
-      <div class="section-head">
-        <span class="section-num">01</span>
-        <h2>About me</h2>
-      </div>
-      <div class="about-grid">
-        <div class="about-text">
-          <p id="aboutText"></p>
-          <div class="edu" id="eduList"></div>
-          <div class="exp" id="expList"></div>
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container hero-layout hero-layout--solo">
+        <div class="hero-copy">
+          <p class="eyebrow reveal">
+            <span class="eyebrow-dot" aria-hidden="true"></span>
+            AI / ML — 2026
+            <span class="eyebrow-sep">/</span>
+            <span id="heroCountry">India</span>
+          </p>
+
+          <h1 class="hero-title reveal">
+            <span id="heroFirst">Cupid</span>
+            <em id="heroLast">Moolchandani</em>
+          </h1>
+
+          <p class="hero-role reveal">
+            <span class="prompt" aria-hidden="true">&gt;</span>
+            <span id="typingText"></span><span class="caret" aria-hidden="true"></span>
+          </p>
+
+          <p class="hero-tag reveal" id="heroTag"></p>
+
+          <div class="hero-cta reveal">
+            <a href="#contact" class="btn btn-primary">Get in touch <span class="btn-arrow" aria-hidden="true">→</span></a>
+            <a href="#games" class="btn btn-quiet">Open the arcade <span class="btn-arrow" aria-hidden="true">→</span></a>
+          </div>
+
+          <ul class="hero-meta reveal">
+            <li><span>Focus</span><strong id="heroFocus">AI / ML engineering</strong></li>
+            <li><span>Based in</span><strong id="heroBase">India</strong></li>
+            <li><span>Now</span><strong id="heroNow" data-availability>Open to opportunities</strong></li>
+          </ul>
         </div>
-        <div class="about-cards" id="funFacts"></div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ============ SKILLS ============ -->
-  <section class="section" id="skills">
-    <div class="container">
-      <div class="section-head">
-        <span class="section-num">02</span>
-        <h2>Skills &amp; toolkit</h2>
       </div>
-      <div class="skills-grid" id="skillsGrid"></div>
-    </div>
-  </section>
 
-  <!-- ============ PROJECTS ============ -->
-  <section class="section" id="projects">
-    <div class="container">
-      <div class="section-head">
-        <span class="section-num">03</span>
-        <h2>Projects</h2>
-      </div>
-      <div class="projects-grid" id="projectsGrid"></div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ============ PLAYGROUND ============ -->
-  <section class="section" id="playground">
-    <div class="container">
-      <div class="section-head">
-        <span class="section-num">04</span>
-        <h2>Neural Playground</h2>
-        <p class="section-sub">Drag the sliders — watch a single neuron (and a tiny MLP) compute in real time. This is the kind of thing I love building.</p>
-      </div>
-      <div class="playground-grid">
-        <div class="play-card">
-          <h3>Single neuron</h3>
-          <div class="canvas-wrap"><canvas id="neuronCanvas" width="420" height="260"></canvas></div>
-          <div class="controls">
-            <label>Input x <input type="range" id="nX" min="-3" max="3" step="0.1" value="1.2"><span id="nXv">1.2</span></label>
-            <label>Weight w <input type="range" id="nW" min="-3" max="3" step="0.1" value="1.0"><span id="nWv">1.0</span></label>
-            <label>Bias b <input type="range" id="nB" min="-3" max="3" step="0.1" value="0.0"><span id="nBv">0.0</span></label>
-            <div class="readout">
-              z = w·x + b = <b id="nZ">0.00</b><br>
-              σ(z) = <b id="nOut">0.00</b>
+    <!-- ============ BACKGROUND + SKILLS ============ -->
+    <section class="section section-compact" id="background">
+      <div class="container">
+        <header class="compact-head reveal">
+          <span class="section-index">01</span>
+          <h2 class="section-label">Background</h2>
+          <p class="compact-note">IIT Delhi · Energy markets · Teaching</p>
+        </header>
+
+        <div class="background-grid">
+          <div class="cv">
+            <div class="cv-group reveal">
+              <h3 class="micro-head"><span>Education</span><span class="micro-count" id="eduCount"></span></h3>
+              <div id="eduList"></div>
+            </div>
+
+            <div class="cv-group reveal">
+              <h3 class="micro-head"><span>Experience</span><span class="micro-count" id="expCount"></span></h3>
+              <div id="expList"></div>
             </div>
           </div>
-        </div>
-        <div class="play-card">
-          <h3>Tiny MLP (2-3-1)</h3>
-          <div class="canvas-wrap"><canvas id="mlpCanvas" width="420" height="260"></canvas></div>
-          <div class="controls">
-            <label>Input x₁ <input type="range" id="mX1" min="-2" max="2" step="0.1" value="0.8"><span id="mX1v">0.8</span></label>
-            <label>Input x₂ <input type="range" id="mX2" min="-2" max="2" step="0.1" value="-0.4"><span id="mX2v">-0.4</span></label>
-            <div class="readout">
-              Hidden: <b id="mH">—</b><br>
-              Output σ(·) = <b id="mOut">0.00</b>
-            </div>
-            <button class="btn btn-ghost small" id="randomizeWeights">Randomize weights</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ============ GAMES ============ -->
-  <section class="section" id="games">
-    <div class="container">
-      <div class="section-head">
-        <span class="section-num">05</span>
-        <h2>Mini-games arcade</h2>
-        <p class="section-sub">Because a portfolio should be fun. Pick a game — all built in vanilla JS, no libraries.</p>
-      </div>
-      <div class="game-tabs" id="gameTabs"></div>
-      <div class="game-stage" id="gameStage"></div>
-    </div>
-  </section>
-
-  <!-- ============ CONTACT ============ -->
-  <section class="section" id="contact">
-    <div class="container">
-      <div class="section-head">
-        <span class="section-num">06</span>
-        <h2>Let's connect</h2>
-      </div>
-      <div class="contact-grid">
-        <div class="contact-info">
-          <p>Whether it's an ML role, a collab, or just a chat about models &amp; markets — my inbox is open.</p>
-          <div class="contact-links" id="contactLinks"></div>
+          <aside class="skills-compact reveal">
+            <h3 class="micro-head"><span>Toolkit</span><span class="micro-count" id="skillCount"></span></h3>
+            <div class="skills-list" id="skillsGrid"></div>
+          </aside>
         </div>
-        <form class="contact-form" id="contactForm">
-          <input type="text" name="name" placeholder="Your name" required />
-          <input type="email" name="email" placeholder="Your email" required />
-          <textarea name="message" rows="4" placeholder="Your message" required></textarea>
-          <button type="submit" class="btn btn-primary">Send message →</button>
-          <p class="form-note" id="formNote"></p>
-        </form>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- ============ ARCADE ============ -->
+    <section class="section section-compact" id="games">
+      <div class="container">
+        <header class="compact-head reveal">
+          <span class="section-index">02</span>
+          <h2 class="section-label">The arcade</h2>
+          <p class="compact-note">Neuron lab + six small games — all vanilla JS</p>
+        </header>
+
+        <div class="arcade-body reveal">
+          <div class="game-tabs" id="gameTabs" role="tablist" aria-label="Neuron lab and mini-games"></div>
+          <div class="game-stage" id="gameStage" role="tabpanel" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
 
   </main>
-  <footer class="footer">
-    <p>Built with ♥ by <span id="footerName"></span> · <span id="year"></span> · Hosted free on GitHub Pages</p>
-    <p class="footer-sub">Designed &amp; coded from scratch — no templates.</p>
+
+  <!-- ============ CONTACT / FOOTER ============ -->
+  <footer class="footer footer-contact" id="contact">
+    <div class="container">
+      <div class="contact-band">
+        <div class="contact-copy reveal">
+          <p class="section-label">03 — Contact</p>
+          <h2 class="contact-title">Let's build something<br /><em>worth learning from.</em></h2>
+        </div>
+
+        <div class="contact-side reveal">
+          <div class="email-row">
+            <a class="email-link" id="emailLink" href="mailto:cupidmoolchandani1@gmail.com">
+              <span id="contactEmail">cupidmoolchandani1@gmail.com</span>
+              <span class="email-arrow" aria-hidden="true">↗</span>
+            </a>
+            <button class="copy-email" id="copyEmail" type="button" aria-label="Copy email address">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+                <rect x="9" y="9" width="12" height="12" rx="2.5"></rect>
+                <path d="M15 5.5V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h.5"></path>
+              </svg>
+              <span class="copy-email-label">Copy</span>
+            </button>
+          </div>
+          <p class="sr-only" id="copyStatus" role="status" aria-live="polite"></p>
+          <div class="contact-links" id="contactLinks"></div>
+          <p class="contact-location" id="contactLocation">India</p>
+        </div>
+      </div>
+
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="brand-mark" id="footerMark">CM</span>
+          <p>© <span id="year"></span> <span id="footerName"></span></p>
+        </div>
+        <p class="footer-note">Designed &amp; built from scratch — no templates.</p>
+        <div class="footer-meta">
+          <span class="clock" id="localTime">India</span>
+          <a href="#hero">Back to top <span aria-hidden="true">↑</span></a>
+        </div>
+      </div>
+    </div>
   </footer>
 
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
-  <div class="konami-overlay" id="konamiOverlay">
-    <h2> Easter Egg Unlocked 🎮</h2>
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">↑</button>
+
+  <div class="konami-overlay" id="konamiOverlay" role="dialog" aria-modal="true" aria-labelledby="konamiTitle">
+    <p class="konami-kicker">↑ ↑ ↓ ↓ ← → ← → B A</p>
+    <h2 id="konamiTitle">Easter egg <em>unlocked.</em></h2>
     <p>You found the Konami code. Matrix mode activated.</p>
-    <button class="btn btn-primary" id="konamiClose">Close</button>
+    <button class="btn btn-primary" id="konamiClose" type="button">Back to the site</button>
   </div>
-  <script src="config.js"></script>
-  <script src="script.js"></script>
+
+  <script src="config.js?v=20261116-9"></script>
+  <script src="script.js?v=20261116-9"></script>
 </body>
 </html>
