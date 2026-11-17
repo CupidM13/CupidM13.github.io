@@ -571,7 +571,7 @@
 
     function syncSky() {
       hero.dataset.sky = daylight ? 'day' : 'night';
-      const label = daylight ? 'Dark mode. Call the sun.' : 'Light mode. Call the moon.';
+      const label = daylight ? 'Dark mode. Call the moon.' : 'Light mode. Wake the sun.';
       skyToggle.title = label;
       skyToggle.setAttribute('aria-label', label);
       skyToggle.setAttribute('aria-pressed', String(daylight));

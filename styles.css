@@ -3863,8 +3863,8 @@ canvas {
   touch-action: manipulation;
 }
 .sky-toggle svg { display: block; width: 100%; height: 100%; }
-.sky-toggle .sun-icon, .hero[data-sky="day"] .moon-icon { display: none; }
-.hero[data-sky="day"] .sun-icon { display: inline; }
+.sky-toggle .moon-icon, .hero[data-sky="day"] .sun-icon { display: none; }
+.hero[data-sky="day"] .moon-icon { display: inline; }
 .hero[data-sky="day"] {
   background: linear-gradient(#96c9df, #cce4df 58%, #efe4bd 84%, #a6b186 94%, #30291c);
 }
