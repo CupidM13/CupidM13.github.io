@@ -4,5 +4,6 @@
   <path fill="#f06a67" d="M16 23h8v5h-8zm24-5h8v7h-8zM12 28h5v8h-5zm8 16h8v6h-8z"/>
   <path d="M7 57L55 9" fill="none" stroke="#101714" stroke-width="9" stroke-linecap="square"/>
   <path d="M7 57L55 9" fill="none" stroke="#f1d59b" stroke-width="4" stroke-linecap="square"/>
-  <path d="M43 9h12v12M7 49v8h8" fill="none" stroke="#f1d59b" stroke-width="4" stroke-linejoin="miter"/>
+  <path d="M57 7L51 21L43 13Z" fill="#f1d59b" stroke="#101714" stroke-width="2" stroke-linejoin="miter"/>
+  <path d="M10 50l8 3m-4-8 8 3" fill="none" stroke="#f1d59b" stroke-width="2.5" stroke-linecap="square"/>
 </svg>
