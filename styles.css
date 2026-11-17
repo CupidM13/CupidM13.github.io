@@ -2011,8 +2011,8 @@ canvas {
 
 .game-stage {
   position: relative;
-  width: min(100%, 300px);
-  max-width: 300px;
+  width: 100%;
+  max-width: none;
   min-width: 0;
   min-height: clamp(24rem, 58vh, 34rem);
   margin-inline: auto;
@@ -2031,7 +2031,7 @@ canvas {
 .game-stage .game-canvas,
 .game-stage .reaction-box {
   width: 100%;
-  max-width: 300px;
+  max-width: 58rem;
   margin-inline: auto;
 }
 
@@ -2411,7 +2411,7 @@ canvas {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
-  max-width: 400px;
+  max-width: min(100%, 38rem);
   margin: 20px auto;
 }
 
@@ -2457,7 +2457,7 @@ canvas {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 6px;
-  max-width: 300px;
+  max-width: min(100%, 28rem);
   margin: 20px auto;
 }
 
@@ -3831,8 +3831,8 @@ canvas {
 
 /* The board only owns touch gestures during a running game. */
 .game-stage #snakeCanvas {
-  width: min(100%, 240px);
-  max-width: 240px;
+  width: min(100%, 360px);
+  max-width: 360px;
   touch-action: pan-y;
   border: 1px solid #42494b;
   border-radius: 12px;
@@ -3843,3 +3843,6 @@ canvas {
 
 #snakeDpad .dpad-btn { touch-action: pan-y; }
 .game-stage:has(#snakeCanvas.is-playing) #snakeDpad .dpad-btn { touch-action: none; }
+
+.game-stage .memory-grid { max-width: min(100%, 38rem); }
+.game-stage .ttt-grid { max-width: min(100%, 28rem); }
