@@ -3871,3 +3871,14 @@ canvas {
 .hero[data-sky="day"] .hero-greeting { color: #274c3b; text-shadow: 0 1px 8px #e4eed6; }
 .hero[data-sky="day"] .hero-disc { opacity: 0; }
 .hero[data-sky="day"] .hero-grid-lines { opacity: .12; }
+.sky-hint {
+  position: absolute;
+  top: 100%;
+  right: 10%;
+  color: #c2d5bd;
+  font: italic clamp(.8rem, 1.6vw, 1rem)/1.15 var(--serif);
+  white-space: nowrap;
+}
+.day-hint, .hero[data-sky="day"] .night-hint { display: none; }
+.hero[data-sky="day"] .day-hint { display: inline; }
+.hero[data-sky="day"] .sky-hint { color: #304c3f; }

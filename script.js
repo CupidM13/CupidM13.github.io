@@ -736,6 +736,7 @@
       for (let y = minY; y <= maxY; y += P) {
         for (let x = minX; x <= maxX; x += P) {
           let density = 0;
+          let light = 0;
           for (let i = 0; i < tiers.length; i += 1) {
             const t = tiers[i];
             const qx = (x - t.actualX) / t.rx;
@@ -743,7 +744,10 @@
             const d2 = qx * qx + qy * qy;
             if (d2 < 1.32) {
               const inf = Math.max(0, 1 - d2 * 0.76) * t.d;
-              if (inf > density) density = inf;
+              if (inf > density) {
+                density = inf;
+                light = (qx - qy) * 0.55;
+              }
             }
           }
           if (density <= 0.05) continue;
@@ -758,7 +762,10 @@
 
           if (dVal > 0.44) {
             // Solid dense core & body
-            const col = dVal > 0.74 ? coreColor : dVal > 0.56 ? midColor : leafColor;
+            const needles = Math.sin(x * 0.14 + y * 0.31) * 0.12;
+            const exposure = light + needles + threshold * 0.13;
+            const col = exposure > 0.45 ? highlightColor : exposure > 0.19 ? leafColor
+              : exposure > -0.2 ? midColor : coreColor;
             offctx.fillStyle = col;
             offctx.fillRect(x, y, P, P);
           } else if (dVal > threshold && dVal > 0.08) {
@@ -847,8 +854,21 @@
       }
 
       // 8. Ground plane, soil roots & wildflowers
-      offctx.fillStyle = rgba(groundColor, 0.45);
-      offctx.fillRect(0, groundY, width, 1);
+      const earth = offctx.createLinearGradient(0, groundY, 0, height);
+      earth.addColorStop(0, daylight ? '#737148' : '#293c2c');
+      earth.addColorStop(0.42, daylight ? '#57452e' : '#2e291d');
+      earth.addColorStop(1, '#211a11');
+      offctx.fillStyle = earth;
+      offctx.fillRect(0, groundY, width, height - groundY);
+      const floorRandom = makeRandom(371);
+      for (let x = 0; x < width; x += P * 2) {
+        const lip = P * (1 + Math.floor(floorRandom() * 3));
+        offctx.fillStyle = floorRandom() > 0.5 ? midColor : groundColor;
+        offctx.fillRect(x, groundY - P, P * 2, lip);
+        const depth = floorRandom() * (height - groundY);
+        offctx.fillStyle = rgba(creamColor, 0.12 * (1 - depth / (height - groundY)));
+        offctx.fillRect(x, groundY + depth, P * 2, P);
+      }
 
       // Root tendrils below ground line
       for (let r = 0; r < 5; r += 1) {
@@ -912,6 +932,26 @@
             const side = k % 2 === 0 ? -P : P;
             offctx.fillRect(headX + side, headY + k * P, P, P);
           }
+        }
+      }
+
+      // Small colonies of spotted caps grow along the mossy bank.
+      const colonies = Math.max(2, Math.round(width / 270));
+      for (let i = 0; i < colonies; i += 1) {
+        const bankX = (i + 0.3 + floorRandom() * 0.35) * width / colonies;
+        for (let cap = 0; cap < 3; cap += 1) {
+          const x = Math.round(bankX / P + cap * 7) * P;
+          const h = P * (4 + Math.floor(floorRandom() * 4));
+          const y = groundY - h;
+          offctx.fillStyle = daylight ? '#ebd5a6' : '#a0b6a5';
+          offctx.fillRect(x, y, P, h);
+          offctx.fillStyle = daylight ? '#9f4737' : '#5e6883';
+          offctx.fillRect(x - 3 * P, y, 7 * P, P);
+          offctx.fillRect(x - 2 * P, y - 2 * P, 5 * P, 2 * P);
+          offctx.fillStyle = daylight ? '#e57851' : '#939cba';
+          offctx.fillRect(x - P, y - 3 * P, 3 * P, P);
+          offctx.fillStyle = creamColor;
+          offctx.fillRect(x + P, y - 2 * P, P, P);
         }
       }
 
