@@ -1182,19 +1182,15 @@ canvas {
 
 @media (max-width: 1120px) {
   .tree-notes {
-    display: flex;
-    inset: auto 12px 20px;
-    justify-content: center;
-    gap: 6px;
-    flex-wrap: wrap;
+    display: block;
   }
 
   .tree-note {
-    position: relative;
-    inset: auto;
-    padding: 4px 8px;
-    font-size: 8px;
-    letter-spacing: 0.07em;
+    position: absolute;
+    padding: 3px 6px;
+    gap: 4px;
+    font-size: clamp(7px, 2vw, 9px);
+    letter-spacing: 0.045em;
   }
 }
 

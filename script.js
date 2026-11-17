@@ -550,7 +550,6 @@
     if (!ctx) return;
 
     const hero = $('hero');
-    const reduce = prefersReduced;
     let width = 0;
     let height = 0;
     let dpr = 1;
@@ -795,26 +794,24 @@
       drawPixelDiamond(tipCx, yC, sparkColor, P);
       tipAnchors.c = { x: tipCx, y: yC };
 
-      // Align CSS tree notes with tips on desktop viewports
-      if (!isMobile) {
-        const noteA = document.querySelector('.tree-note--a');
-        const noteB = document.querySelector('.tree-note--b');
-        const noteC = document.querySelector('.tree-note--c');
-        if (noteA && tipAnchors.a) {
-          noteA.style.top = `${tipAnchors.a.y - 12}px`;
-          noteA.style.left = 'auto';
-          noteA.style.right = `${width - tipAnchors.a.x + 12}px`;
-        }
-        if (noteB && tipAnchors.b) {
-          noteB.style.top = `${tipAnchors.b.y - 12}px`;
-          noteB.style.left = `${tipAnchors.b.x + 12}px`;
-          noteB.style.right = 'auto';
-        }
-        if (noteC && tipAnchors.c) {
-          noteC.style.top = `${tipAnchors.c.y - 12}px`;
-          noteC.style.left = 'auto';
-          noteC.style.right = `${width - tipAnchors.c.x + 12}px`;
-        }
+      // Keep section links anchored to the branch tips at every viewport size.
+      const noteA = document.querySelector('.tree-note--a');
+      const noteB = document.querySelector('.tree-note--b');
+      const noteC = document.querySelector('.tree-note--c');
+      if (noteA && tipAnchors.a) {
+        noteA.style.top = `${tipAnchors.a.y - 12}px`;
+        noteA.style.left = 'auto';
+        noteA.style.right = `${width - tipAnchors.a.x + 12}px`;
+      }
+      if (noteB && tipAnchors.b) {
+        noteB.style.top = `${tipAnchors.b.y - 12}px`;
+        noteB.style.left = `${tipAnchors.b.x + 12}px`;
+        noteB.style.right = 'auto';
+      }
+      if (noteC && tipAnchors.c) {
+        noteC.style.top = `${tipAnchors.c.y - 12}px`;
+        noteC.style.left = 'auto';
+        noteC.style.right = `${width - tipAnchors.c.x + 12}px`;
       }
 
       // 8. Ground plane, soil roots & wildflowers
@@ -971,7 +968,7 @@
     }
 
     function start() {
-      if (reduce || running || !visible()) return;
+      if (running || !visible()) return;
       running = true;
       started = performance.now();
       frameId = window.requestAnimationFrame(loop);
@@ -1027,7 +1024,6 @@
     }
 
     hero?.addEventListener('pointermove', (event) => {
-      if (reduce) return;
       pointer.tx = (event.clientX / window.innerWidth) * 2 - 1;
       pointer.ty = (event.clientY / window.innerHeight) * 2 - 1;
       pointer.active = true;
