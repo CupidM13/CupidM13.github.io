@@ -1662,7 +1662,7 @@
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     const grid = 18;
-    const stepDuration = 65;
+    const stepDuration = 105;
     const cols = canvas.width / grid;
     const rows = canvas.height / grid;
     let snake;

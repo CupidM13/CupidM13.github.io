@@ -2052,6 +2052,17 @@ canvas {
   max-width: 100%;
 }
 
+.game-stage.is-lab {
+  width: 100%;
+  max-width: min(100%, 58rem);
+}
+
+.game-stage.is-lab .lab-panel,
+.game-stage.is-lab .lab-body,
+.game-stage.is-lab .canvas-wrap {
+  width: 100%;
+}
+
 .game-stage h3 {
   font-family: var(--serif);
   font-size: clamp(1.7rem, 2.8vw, 2.1rem);
@@ -3820,8 +3831,8 @@ canvas {
 
 /* The board only owns touch gestures during a running game. */
 .game-stage #snakeCanvas {
-  width: min(100%, 300px);
-  max-width: 300px;
+  width: min(100%, 240px);
+  max-width: 240px;
   touch-action: pan-y;
   border: 1px solid #42494b;
   border-radius: 12px;
