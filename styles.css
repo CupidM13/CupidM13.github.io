@@ -3882,3 +3882,5 @@ canvas {
 .day-hint, .hero[data-sky="day"] .night-hint { display: none; }
 .hero[data-sky="day"] .day-hint { display: inline; }
 .hero[data-sky="day"] .sky-hint { color: #304c3f; }
+
+.sky-hint { line-height: 1.35; text-align: center; }
