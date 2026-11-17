@@ -5,8 +5,8 @@
 window.SITE = {
   name: "Cupid Moolchandani",
   initials: "CM",
-  role: "Aspiring AI / ML Engineer",
-  tagline: "I turn data, math and code into systems that learn, adapt and create value.",
+  role: "AI / ML Engineer",
+  tagline: "",
   location: "India",
   email: "cupidmoolchandani1@gmail.com",
   available: true, // shows "Open to opportunities" badge

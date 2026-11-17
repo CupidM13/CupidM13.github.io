@@ -3,61 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cupid Moolchandani — Aspiring AI/ML Engineer</title>
-  <meta name="description" content="Cupid Moolchandani — aspiring AI/ML engineer from IIT Delhi, with a background in energy markets and teaching." />
-  <meta name="author" content="Cupid Moolchandani" />
-  <meta property="og:title" content="Cupid Moolchandani — AI/ML Engineer" />
-  <meta property="og:description" content="Aspiring AI/ML engineer from IIT Delhi. Data, markets, models and a few interactive experiments." />
+  <title>Cupid — AI / ML Engineer</title>
+  <meta name="description" content="Cupid — AI / ML engineer from IIT Delhi, with a background in energy markets and quantitative modeling." />
+  <meta name="author" content="Cupid" />
+  <meta property="og:title" content="Cupid — AI / ML Engineer" />
+  <meta property="og:description" content="AI / ML engineer from IIT Delhi. Data, markets, models and interactive labs." />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#0b0b0c" />
+  <meta name="theme-color" content="#0b120f" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%2312352A'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Georgia,serif' font-size='25' font-style='italic' fill='%23F1EBDA'%3ECM%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261116-9" />
+  <link rel="stylesheet" href="styles.css?v=20261117-3" />
   <script>
-    try {
-      const saved = localStorage.getItem('theme');
-      if (saved === 'light' || saved === 'dark') {
-        document.documentElement.setAttribute('data-theme', saved);
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        document.documentElement.setAttribute('data-theme', saved === 'light' ? 'light' : 'dark');
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
       }
-    } catch (e) {}
+    })();
   </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
   <canvas id="matrixCanvas" aria-hidden="true"></canvas>
 
-  <!-- ============ NAV ============ -->
-  <header class="nav" id="nav">
-    <div class="nav-inner">
-      <a href="#hero" class="brand" aria-label="Back to top">
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="nav">
+    <div class="header-inner">
+      <a href="#hero" class="brand" aria-label="Cupid Moolchandani — back to top">
         <span class="brand-mark" id="brandMark">CM</span>
-        <span class="brand-text">
+        <span class="brand-copy">
           <strong id="brandName">Cupid Moolchandani</strong>
-          <span>AI / ML Engineer</span>
+          <span class="brand-role">AI / ML Engineer</span>
         </span>
       </a>
 
       <nav class="nav-links" id="navLinks" aria-label="Primary">
-        <a href="#background"><span>01</span>Background</a>
-        <a href="#games"><span>02</span>Arcade</a>
-        <a href="#contact"><span>03</span>Contact</a>
+        <a href="#background"><span class="nav-index">01</span><span>Background</span></a>
+        <a href="#games"><span class="nav-index">02</span><span>Arcade</span></a>
+        <a href="#contact"><span class="nav-index">03</span><span>Contact</span></a>
       </nav>
 
       <div class="nav-actions">
-        <span class="nav-status" data-availability><i aria-hidden="true"></i>Open to work</span>
-        <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Switch to light theme">
-          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-            <circle cx="12" cy="12" r="4"></circle>
-            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path>
-          </svg>
-          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-            <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+        <span class="status-badge" data-availability>
+          <i class="pulse-dot" aria-hidden="true"></i>
+          <span data-availability-text>Open to work</span>
+        </span>
+
+        <button class="icon-btn sound-toggle" id="soundToggle" type="button" aria-label="Enable interface sound" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M11 5 6.6 8.8H3.4v6.4h3.2L11 19V5Z"></path>
+            <path class="sound-wave" d="M14.8 9.2a4 4 0 0 1 0 5.6"></path>
+            <path class="sound-wave" d="M17.6 6.6a7.6 7.6 0 0 1 0 10.8"></path>
           </svg>
         </button>
+
+        <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="3.6"></circle>
+            <path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"></path>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a7.4 7.4 0 1 0 10.7 10.7Z"></path>
+          </svg>
+        </button>
+
         <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
           <span></span><span></span>
         </button>
@@ -65,122 +81,328 @@
     </div>
   </header>
 
+  <div class="nav-scrim" id="navScrim" aria-hidden="true"></div>
+
   <main id="main">
     <!-- ============ HERO ============ -->
     <section class="hero" id="hero">
-      <div class="hero-bg" aria-hidden="true"></div>
-      <div class="container hero-layout hero-layout--solo">
-        <div class="hero-copy">
-          <p class="eyebrow reveal">
-            <span class="eyebrow-dot" aria-hidden="true"></span>
-            AI / ML — 2026
-            <span class="eyebrow-sep">/</span>
-            <span id="heroCountry">India</span>
-          </p>
+      <div class="hero-field" aria-hidden="true">
+        <div class="hero-grid-lines"></div>
+        <div class="hero-disc"></div>
+        <canvas id="gardenCanvas"></canvas>
+      </div>
 
+      <nav class="tree-notes" aria-label="Jump to a section">
+        <a class="tree-note tree-note--a" href="#background">
+          <span class="tree-note-index">01</span><span>background</span>
+        </a>
+        <a class="tree-note tree-note--b" href="#games">
+          <span class="tree-note-index">02</span><span>arcade</span>
+        </a>
+        <a class="tree-note tree-note--c" href="#contact">
+          <span class="tree-note-index">03</span><span>contact</span>
+        </a>
+      </nav>
+
+      <div class="spine hero-inner">
+        <div class="hero-copy">
           <h1 class="hero-title reveal">
             <span id="heroFirst">Cupid</span>
-            <em id="heroLast">Moolchandani</em>
           </h1>
 
           <p class="hero-role reveal">
-            <span class="prompt" aria-hidden="true">&gt;</span>
+            <span class="role-mark" aria-hidden="true">↳</span>
             <span id="typingText"></span><span class="caret" aria-hidden="true"></span>
           </p>
 
-          <p class="hero-tag reveal" id="heroTag"></p>
-
-          <div class="hero-cta reveal">
-            <a href="#contact" class="btn btn-primary">Get in touch <span class="btn-arrow" aria-hidden="true">→</span></a>
-            <a href="#games" class="btn btn-quiet">Open the arcade <span class="btn-arrow" aria-hidden="true">→</span></a>
+          <div class="hero-actions reveal">
+            <a class="btn btn-primary" href="#contact">Get in touch <span class="arrow" aria-hidden="true">↗</span></a>
+            <a class="btn btn-quiet" href="#games">Open the arcade <span class="arrow" aria-hidden="true">→</span></a>
           </div>
 
-          <ul class="hero-meta reveal">
-            <li><span>Focus</span><strong id="heroFocus">AI / ML engineering</strong></li>
-            <li><span>Based in</span><strong id="heroBase">India</strong></li>
-            <li><span>Now</span><strong id="heroNow" data-availability>Open to opportunities</strong></li>
-          </ul>
+          <div class="hero-contact reveal">
+            <a class="email-link" data-email-link href="mailto:cupidmoolchandani1@gmail.com">
+              <span data-email-text>cupidmoolchandani1@gmail.com</span>
+            </a>
+            <button class="copy-btn" data-copy-email type="button" aria-label="Copy email address">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+                <path d="M15 5.5V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h.5"></path>
+              </svg>
+              <span class="copy-label">Copy</span>
+            </button>
+            <span class="contact-divider" aria-hidden="true"></span>
+            <div class="hero-social" id="heroSocial"></div>
+          </div>
         </div>
-
       </div>
 
+      <div class="spine hero-foot">
+        <ul class="hero-meta reveal">
+          <li><span>Focus</span><strong id="heroFocus">AI / ML engineering</strong></li>
+          <li><span>Based in</span><strong id="heroBase">India</strong></li>
+          <li><span>Education</span><strong id="heroEducation">IIT Delhi · 2026</strong></li>
+          <li><span>Coordinates</span><strong>28.61° N · 77.20° E</strong></li>
+        </ul>
+      </div>
     </section>
 
-    <!-- ============ BACKGROUND + SKILLS ============ -->
-    <section class="section section-compact" id="background">
-      <div class="container">
-        <header class="compact-head reveal">
-          <span class="section-index">01</span>
-          <h2 class="section-label">Background</h2>
-          <p class="compact-note">IIT Delhi · Energy markets · Teaching</p>
-        </header>
+    <!-- ============ BACKGROUND ============ -->
+    <section class="section notes" id="background">
+      <div class="spine">
+        <div class="notes-grid">
+          <aside class="notes-rail">
+            <div class="rail-sticky reveal">
+              <p class="section-kicker">
+                <span class="section-index">01</span>
+                <span class="kicker-line" aria-hidden="true"></span>
+                <span>Background</span>
+              </p>
+              <h2 class="section-title">Education &amp; <em>experience.</em></h2>
+              <p class="section-note">IIT Delhi · Markets · Technical Systems</p>
 
-        <div class="background-grid">
-          <div class="cv">
-            <div class="cv-group reveal">
-              <h3 class="micro-head"><span>Education</span><span class="micro-count" id="eduCount"></span></h3>
-              <div id="eduList"></div>
+              <figure class="rail-fig">
+                <svg class="sprig" viewBox="0 0 200 300" aria-hidden="true" fill="none">
+                  <g stroke="currentColor" stroke-width="1.05" stroke-linecap="round">
+                    <path d="M104 292C100 250 108 208 102 168C98 136 106 106 100 76"></path>
+                    <path d="M103 254C119 232 133 208 140 176"></path>
+                    <path d="M102 230C86 208 72 190 64 160"></path>
+                    <path d="M102 284C118 270 130 260 140 246"></path>
+                  </g>
+                  <g class="sprig-leaf" stroke="currentColor" stroke-width=".9" stroke-linejoin="round">
+                    <path d="M104 246C88 246 74 238 66 224C84 222 100 230 104 246Z"></path>
+                    <path d="M104 222C120 220 134 210 140 196C122 196 108 206 104 222Z"></path>
+                    <path d="M101 196C85 194 73 184 68 170C84 170 98 180 101 196Z"></path>
+                    <path d="M101 176C115 172 126 160 130 146C114 148 103 158 101 176Z"></path>
+                    <path d="M100 150C86 146 77 136 74 124C88 126 98 136 100 150Z"></path>
+                    <path d="M102 134C114 128 121 116 122 104C108 108 101 118 102 134Z"></path>
+                    <path d="M139 200C151 198 162 190 166 178C152 178 141 186 139 200Z"></path>
+                    <path d="M65 184C55 180 48 170 47 158C59 162 66 172 65 184Z"></path>
+                    <path d="M136 240C147 236 154 226 155 214C143 218 136 228 136 240Z"></path>
+                  </g>
+                  <g class="sprig-flower">
+                    <g transform="translate(100 64)">
+                      <ellipse cx="0" cy="-16" rx="8" ry="14"></ellipse>
+                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(72)"></ellipse>
+                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(144)"></ellipse>
+                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(216)"></ellipse>
+                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(288)"></ellipse>
+                      <circle cx="0" cy="0" r="4.2" class="sprig-center"></circle>
+                    </g>
+                    <g transform="translate(140 174) scale(.62)">
+                      <ellipse cx="0" cy="-16" rx="8" ry="14"></ellipse>
+                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(72)"></ellipse>
+                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(144)"></ellipse>
+                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(216)"></ellipse>
+                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(288)"></ellipse>
+                      <circle cx="0" cy="0" r="4.2" class="sprig-center"></circle>
+                    </g>
+                    <g transform="translate(64 158) scale(.44)">
+                      <ellipse cx="0" cy="-16" rx="8" ry="14"></ellipse>
+                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(72)"></ellipse>
+                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(144)"></ellipse>
+                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(216)"></ellipse>
+                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(288)"></ellipse>
+                      <circle cx="0" cy="0" r="4.2" class="sprig-center"></circle>
+                    </g>
+                  </g>
+                </svg>
+                <figcaption>01 / Background</figcaption>
+              </figure>
+            </div>
+          </aside>
+
+          <div class="notes-body">
+            <div class="cv-columns">
+              <div class="cv-group reveal" id="eduGroup">
+                <div class="micro-head">
+                  <h3>Education</h3>
+                  <span class="micro-count" id="eduCount">01</span>
+                </div>
+                <div class="entry-list" id="eduList"></div>
+              </div>
+
+              <div class="cv-group reveal" id="expGroup">
+                <div class="micro-head">
+                  <h3>Experience</h3>
+                  <span class="micro-count" id="expCount">03</span>
+                </div>
+                <div class="entry-list" id="expList"></div>
+              </div>
             </div>
 
-            <div class="cv-group reveal">
-              <h3 class="micro-head"><span>Experience</span><span class="micro-count" id="expCount"></span></h3>
-              <div id="expList"></div>
+            <div class="cv-group cv-group--skills reveal" id="skillGroup">
+              <div class="micro-head">
+                <h3>Toolkit</h3>
+                <span class="micro-count" id="skillCount">05</span>
+              </div>
+
+              <p class="learning-note" id="learningNote" hidden></p>
+
+              <div class="skills-list" id="skillsGrid"></div>
             </div>
           </div>
-
-          <aside class="skills-compact reveal">
-            <h3 class="micro-head"><span>Toolkit</span><span class="micro-count" id="skillCount"></span></h3>
-            <div class="skills-list" id="skillsGrid"></div>
-          </aside>
         </div>
       </div>
     </section>
 
     <!-- ============ ARCADE ============ -->
-    <section class="section section-compact" id="games">
-      <div class="container">
-        <header class="compact-head reveal">
-          <span class="section-index">02</span>
-          <h2 class="section-label">The arcade</h2>
-          <p class="compact-note">Neuron lab + six small games — all vanilla JS</p>
+    <section class="section section--arcade" id="games">
+      <div class="arcade-stars" aria-hidden="true"></div>
+
+      <div class="spine">
+        <header class="section-head section-head--light reveal">
+          <p class="section-kicker">
+            <span class="section-index">02</span>
+            <span class="kicker-line" aria-hidden="true"></span>
+            <span>Arcade</span>
+          </p>
+          <h2 class="section-title">Interactive <em>labs &amp; arcade.</em></h2>
+          <p class="section-note">Two neural network simulations, six mini-games — vanilla JS, zero dependencies.</p>
         </header>
 
-        <div class="arcade-body reveal">
-          <div class="game-tabs" id="gameTabs" role="tablist" aria-label="Neuron lab and mini-games"></div>
-          <div class="game-stage" id="gameStage" role="tabpanel" aria-live="polite"></div>
+        <div class="arcade reveal">
+          <div class="arcade-frame">
+            <div class="arcade-bar">
+              <span>Console / 02</span>
+              <span>Built from scratch</span>
+            </div>
+
+            <div class="game-tabs" id="gameTabs" role="tablist" aria-label="Neuron lab and mini-games"></div>
+
+            <div class="arcade-screen">
+              <span class="pixel-corner pixel-corner--tl" aria-hidden="true"></span>
+              <span class="pixel-corner pixel-corner--tr" aria-hidden="true"></span>
+              <span class="pixel-corner pixel-corner--bl" aria-hidden="true"></span>
+              <span class="pixel-corner pixel-corner--br" aria-hidden="true"></span>
+              <div class="game-stage" id="gameStage" role="tabpanel" aria-live="polite"></div>
+            </div>
+
+            <p class="arcade-foot">
+              <span>Eight small experiments</span>
+              <span id="arcadeStatus">Lab · Neuron lab</span>
+            </p>
+          </div>
         </div>
       </div>
     </section>
-
   </main>
 
   <!-- ============ CONTACT / FOOTER ============ -->
-  <footer class="footer footer-contact" id="contact">
-    <div class="container">
-      <div class="contact-band">
-        <div class="contact-copy reveal">
-          <p class="section-label">03 — Contact</p>
-          <h2 class="contact-title">Let's build something<br /><em>worth learning from.</em></h2>
+  <footer class="contact" id="contact">
+    <div class="contact-dots" aria-hidden="true"></div>
+
+    <div class="spine">
+      <div class="contact-head reveal">
+        <div class="contact-heading">
+          <p class="section-kicker">
+            <span class="section-index">03</span>
+            <span class="kicker-line" aria-hidden="true"></span>
+            <span>Contact</span>
+          </p>
+          <h2 class="contact-title">Get in <em>touch.</em></h2>
         </div>
 
-        <div class="contact-side reveal">
+        <div class="seal" aria-hidden="true">
+          <svg viewBox="0 0 140 140">
+            <defs>
+              <path id="sealCircle" d="M70,70 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0"></path>
+            </defs>
+            <g class="seal-ring">
+              <text class="seal-text" textLength="326" lengthAdjust="spacingAndGlyphs">
+                <textPath href="#sealCircle" startOffset="0">CUPID MOOLCHANDANI — RESEARCH &amp; SYSTEMS — INDIA — 2026 —</textPath>
+              </text>
+            </g>
+            <circle cx="70" cy="70" r="34" class="seal-inner"></circle>
+            <text x="70" y="79" text-anchor="middle" class="seal-mark">CM</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="contact-grid reveal">
+        <div class="contact-main">
+          <p class="contact-lede">Open to AI / ML engineering, quantitative research, and modeling complex systems.</p>
+
           <div class="email-row">
-            <a class="email-link" id="emailLink" href="mailto:cupidmoolchandani1@gmail.com">
-              <span id="contactEmail">cupidmoolchandani1@gmail.com</span>
-              <span class="email-arrow" aria-hidden="true">↗</span>
+            <a class="email-link email-link--lg" data-email-link href="mailto:cupidmoolchandani1@gmail.com">
+              <span data-email-text>cupidmoolchandani1@gmail.com</span>
+              <span class="arrow" aria-hidden="true">↗</span>
             </a>
-            <button class="copy-email" id="copyEmail" type="button" aria-label="Copy email address">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
-                <rect x="9" y="9" width="12" height="12" rx="2.5"></rect>
+            <button class="copy-btn copy-btn--lg" id="copyEmail" data-copy-email type="button" aria-label="Copy email address">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="11" height="11" rx="2"></rect>
                 <path d="M15 5.5V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h.5"></path>
               </svg>
-              <span class="copy-email-label">Copy</span>
+              <span class="copy-label">Copy</span>
             </button>
           </div>
           <p class="sr-only" id="copyStatus" role="status" aria-live="polite"></p>
-          <div class="contact-links" id="contactLinks"></div>
-          <p class="contact-location" id="contactLocation">India</p>
+
+          <div class="contact-links">
+            <div class="contact-links-head">
+              <span>Elsewhere</span>
+              <span id="contactLinkCount">02</span>
+            </div>
+            <div id="contactLinks"></div>
+          </div>
         </div>
+
+        <aside class="contact-card">
+          <div class="contact-card-art" aria-hidden="true">
+            <svg class="sprig sprig--lg" viewBox="0 0 200 300" fill="none">
+              <g stroke="currentColor" stroke-width="1.05" stroke-linecap="round">
+                <path d="M104 292C100 250 108 208 102 168C98 136 106 106 100 76"></path>
+                <path d="M103 254C119 232 133 208 140 176"></path>
+                <path d="M102 230C86 208 72 190 64 160"></path>
+                <path d="M102 284C118 270 130 260 140 246"></path>
+              </g>
+              <g class="sprig-leaf" stroke="currentColor" stroke-width=".9" stroke-linejoin="round">
+                <path d="M104 246C88 246 74 238 66 224C84 222 100 230 104 246Z"></path>
+                <path d="M104 222C120 220 134 210 140 196C122 196 108 206 104 222Z"></path>
+                <path d="M101 196C85 194 73 184 68 170C84 170 98 180 101 196Z"></path>
+                <path d="M101 176C115 172 126 160 130 146C114 148 103 158 101 176Z"></path>
+                <path d="M100 150C86 146 77 136 74 124C88 126 98 136 100 150Z"></path>
+                <path d="M102 134C114 128 121 116 122 104C108 108 101 118 102 134Z"></path>
+                <path d="M139 200C151 198 162 190 166 178C152 178 141 186 139 200Z"></path>
+                <path d="M65 184C55 180 48 170 47 158C59 162 66 172 65 184Z"></path>
+                <path d="M136 240C147 236 154 226 155 214C143 218 136 228 136 240Z"></path>
+              </g>
+              <g class="sprig-flower">
+                <g transform="translate(100 64)">
+                  <ellipse cx="0" cy="-16" rx="8" ry="14"></ellipse>
+                  <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(72)"></ellipse>
+                  <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(144)"></ellipse>
+                  <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(216)"></ellipse>
+                  <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(288)"></ellipse>
+                  <circle cx="0" cy="0" r="4.2" class="sprig-center"></circle>
+                </g>
+                <g transform="translate(140 174) scale(.62)">
+                  <ellipse cx="0" cy="-16" rx="8" ry="14"></ellipse>
+                  <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(72)"></ellipse>
+                  <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(144)"></ellipse>
+                  <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(216)"></ellipse>
+                  <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(288)"></ellipse>
+                  <circle cx="0" cy="0" r="4.2" class="sprig-center"></circle>
+                </g>
+                <g transform="translate(64 158) scale(.44)">
+                  <ellipse cx="0" cy="-16" rx="8" ry="14"></ellipse>
+                  <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(72)"></ellipse>
+                  <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(144)"></ellipse>
+                  <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(216)"></ellipse>
+                  <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(288)"></ellipse>
+                  <circle cx="0" cy="0" r="4.2" class="sprig-center"></circle>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <p class="contact-card-label">Profile</p>
+          <p class="contact-card-note">Read.Build.Learn.</p>
+          <p class="contact-location">
+            <span id="contactLocation">India</span>
+            <span class="sep" aria-hidden="true">·</span>
+            <span><span id="contactTime">--:--</span> IST</span>
+          </p>
+        </aside>
       </div>
 
       <div class="footer-inner">
@@ -190,7 +412,7 @@
         </div>
         <p class="footer-note">Designed &amp; built from scratch — no templates.</p>
         <div class="footer-meta">
-          <span class="clock" id="localTime">India</span>
+          <span class="clock" id="localTime">India — --:-- IST</span>
           <a href="#hero">Back to top <span aria-hidden="true">↑</span></a>
         </div>
       </div>
@@ -200,13 +422,15 @@
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">↑</button>
 
   <div class="konami-overlay" id="konamiOverlay" role="dialog" aria-modal="true" aria-labelledby="konamiTitle">
-    <p class="konami-kicker">↑ ↑ ↓ ↓ ← → ← → B A</p>
-    <h2 id="konamiTitle">Easter egg <em>unlocked.</em></h2>
-    <p>You found the Konami code. Matrix mode activated.</p>
-    <button class="btn btn-primary" id="konamiClose" type="button">Back to the site</button>
+    <div class="konami-card">
+      <p class="konami-kicker">↑ ↑ ↓ ↓ ← → ← → B A</p>
+      <h2 id="konamiTitle">Easter egg <em>unlocked.</em></h2>
+      <p>You found the Konami code. Matrix mode activated.</p>
+      <button class="btn btn-primary" id="konamiClose" type="button">Back to the site</button>
+    </div>
   </div>
 
-  <script src="config.js?v=20261116-9"></script>
-  <script src="script.js?v=20261116-9"></script>
+  <script src="config.js?v=20261117-2"></script>
+  <script src="script.js?v=20261117-2"></script>
 </body>
 </html>
