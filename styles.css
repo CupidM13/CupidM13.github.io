@@ -3846,3 +3846,28 @@ canvas {
 
 .game-stage .memory-grid { max-width: min(100%, 38rem); }
 .game-stage .ttt-grid { max-width: min(100%, 28rem); }
+
+.sky-toggle {
+  position: absolute;
+  left: 82%;
+  top: 16%;
+  z-index: 4;
+  transform: translate(-50%, -50%);
+  width: clamp(44px, 7vw, 58px);
+  aspect-ratio: 1;
+  padding: 6px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.sky-toggle svg { display: block; width: 100%; height: 100%; }
+.sky-toggle .sun-icon, .hero[data-sky="day"] .moon-icon { display: none; }
+.hero[data-sky="day"] .sun-icon { display: inline; }
+.hero[data-sky="day"] {
+  background: linear-gradient(#96c9df, #cce4df 58%, #efe4bd 84%, #a6b186 94%, #30291c);
+}
+.hero[data-sky="day"] .hero-greeting { color: #274c3b; text-shadow: 0 1px 8px #e4eed6; }
+.hero[data-sky="day"] .hero-disc { opacity: 0; }
+.hero[data-sky="day"] .hero-grid-lines { opacity: .12; }

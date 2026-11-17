@@ -566,6 +566,24 @@
     // Dynamic branch anchor points for CSS tree notes
     const tipAnchors = { a: null, b: null, c: null };
 
+    const skyToggle = $('skyToggle');
+    let daylight = false;
+    try { daylight = localStorage.getItem('gardenSky') === 'day'; } catch (_) { /* optional storage */ }
+
+    function syncSky() {
+      hero.dataset.sky = daylight ? 'day' : 'night';
+      const label = daylight ? 'Switch to night' : 'Switch to daylight';
+      skyToggle.title = label;
+      skyToggle.setAttribute('aria-label', label);
+    }
+    syncSky();
+    skyToggle.addEventListener('click', () => {
+      daylight = !daylight;
+      syncSky();
+      try { localStorage.setItem('gardenSky', hero.dataset.sky); } catch (_) { /* optional storage */ }
+      redrawGarden();
+    });
+
     function makeRandom(seed) {
       let state = seed;
       return function random() {
@@ -600,38 +618,26 @@
       }
 
       // Color palette (Dark Obsidian & Moss Emerald)
-      const trunkColor = '#0d2217';
-      const barkColor = '#1a3e29';
-      const coreColor = '#153c27'; // dense pine core (rich, solid)
-      const midColor = '#2a6341';  // rich foliage body
-      const leafColor = '#468e60'; // vibrant moss
-      const highlightColor = '#81c69a'; // luminous mint edges
-      const sparkColor = '#d9855b'; // warm copper embers
+      const trunkColor = daylight ? '#60472e' : '#0d2217';
+      const barkColor = daylight ? '#806344' : '#1a3e29';
+      const coreColor = daylight ? '#305939' : '#153c27'; // dense pine core (rich, solid)
+      const midColor = daylight ? '#508449' : '#2a6341';  // rich foliage body
+      const leafColor = daylight ? '#79a852' : '#468e60'; // vibrant moss
+      const highlightColor = daylight ? '#bad977' : '#81c69a'; // luminous mint edges
+      const sparkColor = daylight ? '#c96d39' : '#d9855b'; // warm copper embers
       const creamColor = '#efeade'; // wildflower florets
-      const groundColor = '#244834';
+      const groundColor = daylight ? '#574d35' : '#244834';
       const starColor = '#86c49c';
 
       offctx.clearRect(0, 0, width, height);
 
-      // Pixel moon and distant woodland give the garden depth without crowding the tree.
-      const moonX = Math.round(width * 0.82 / P) * P;
-      const moonY = height * 0.16;
-      const moonR = Math.min(width * 0.035, 24);
-      for (let my = -moonR; my <= moonR; my += P) {
-        for (let mx = -moonR; mx <= moonR; mx += P) {
-          if (mx * mx + my * my > moonR * moonR) continue;
-          const shadow = (mx - moonR * 0.5) ** 2 + (my + moonR * 0.28) ** 2 < moonR ** 2;
-          offctx.fillStyle = shadow ? '#0c1915' : (random() > 0.3 ? '#728d78' : '#a8b497');
-          offctx.fillRect(moonX + mx, moonY + my, P, P);
-        }
-      }
       // Layered silhouettes are concentrated at the edges to frame the central canopy.
       for (let layer = 0; layer < 2; layer += 1) {
         for (let n = 0; n < 18; n += 1) {
           const x = width * n / 17;
           const edge = Math.abs(x / width - 0.5) * 2;
           const h = height * (0.04 + edge * 0.15) * (0.7 + random() * 0.3);
-          offctx.fillStyle = layer ? '#10251b' : '#0c1b15';
+          offctx.fillStyle = daylight ? (layer ? '#88a788' : '#abc3a8') : (layer ? '#10251b' : '#0c1b15');
           for (let y = 0; y < h; y += P * 2) {
             const spread = (y / h) * h * 0.23;
             offctx.fillRect(Math.round((x - spread) / P) * P, groundY - h + y, spread * 2 + P, P * 2);
@@ -649,7 +655,7 @@
         const alpha = 0.08 + random() * 0.35;
         stars.push({ x: sx, y: sy, size: sz, alpha, phase: random() * Math.PI * 2 });
         offctx.fillStyle = rgba(starColor, alpha);
-        offctx.fillRect(sx, sy, sz, sz);
+        if (!daylight) offctx.fillRect(sx, sy, sz, sz);
       }
 
       // 2. Trunk function
@@ -974,7 +980,7 @@
         }
 
         const alpha = 0.35 + 0.55 * (0.5 + 0.5 * Math.sin(t * 2.2 + fly.phase));
-        const tone = fly.warm ? '#d9855b' : '#81c69a';
+        const tone = daylight ? '#fff3bc' : (fly.warm ? '#d9855b' : '#81c69a');
 
         // Pixel diamond spark
         ctx.fillStyle = rgba(tone, alpha * 0.25);
