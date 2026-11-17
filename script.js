@@ -362,16 +362,14 @@
     if (!list) return;
 
     list.innerHTML = entries.map(([category, items], index) => {
-      const tags = (items || [])
-        .map((item) => `<span class="tag">${esc(item)}</span>`)
-        .join('');
+      const itemsText = (items || []).map((item) => esc(item)).join(', ');
 
       return `
         <div class="skill-row reveal" style="--delay:${index * 60}ms">
           <span class="skill-index">${pad(index + 1)}</span>
           <div class="skill-body">
-            <h4 class="skill-name">${esc(category)}</h4>
-            <div class="skill-tags">${tags}</div>
+            <h4 class="skill-name">${esc(category)}:</h4>
+            <span class="skill-items-text">${itemsText}</span>
           </div>
           <span class="skill-count">${pad((items || []).length)}</span>
         </div>`;
@@ -585,7 +583,7 @@
       const P = isMobile ? 2 : 2.5; // pixel unit
 
       const groundY = Math.round(height * 0.94);
-      const rootX = Math.round(width * (isMobile ? 0.70 : isTablet ? 0.64 : 0.60));
+      const rootX = Math.round(width * 0.50);
       const treeH = Math.min(Math.round(height * 0.88), isMobile ? 460 : 680);
       const topY = groundY - treeH;
 

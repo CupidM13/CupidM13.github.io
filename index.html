@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261117-3" />
+  <link rel="stylesheet" href="styles.css?v=20261117-4" />
   <script>
     (function () {
       try {
@@ -30,58 +30,8 @@
   <a class="skip-link" href="#main">Skip to content</a>
 
   <div class="grain" aria-hidden="true"></div>
-  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
   <canvas id="matrixCanvas" aria-hidden="true"></canvas>
 
-  <!-- ============ HEADER ============ -->
-  <header class="site-header" id="nav">
-    <div class="header-inner">
-      <a href="#hero" class="brand" aria-label="Cupid Moolchandani — back to top">
-        <span class="brand-mark" id="brandMark">CM</span>
-        <span class="brand-copy">
-          <strong id="brandName">Cupid Moolchandani</strong>
-          <span class="brand-role">AI / ML Engineer</span>
-        </span>
-      </a>
-
-      <nav class="nav-links" id="navLinks" aria-label="Primary">
-        <a href="#background"><span class="nav-index">01</span><span>Background</span></a>
-        <a href="#games"><span class="nav-index">02</span><span>Arcade</span></a>
-        <a href="#contact"><span class="nav-index">03</span><span>Contact</span></a>
-      </nav>
-
-      <div class="nav-actions">
-        <span class="status-badge" data-availability>
-          <i class="pulse-dot" aria-hidden="true"></i>
-          <span data-availability-text>Open to work</span>
-        </span>
-
-        <button class="icon-btn sound-toggle" id="soundToggle" type="button" aria-label="Enable interface sound" aria-pressed="false">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M11 5 6.6 8.8H3.4v6.4h3.2L11 19V5Z"></path>
-            <path class="sound-wave" d="M14.8 9.2a4 4 0 0 1 0 5.6"></path>
-            <path class="sound-wave" d="M17.6 6.6a7.6 7.6 0 0 1 0 10.8"></path>
-          </svg>
-        </button>
-
-        <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme">
-          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="3.6"></circle>
-            <path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"></path>
-          </svg>
-          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a7.4 7.4 0 1 0 10.7 10.7Z"></path>
-          </svg>
-        </button>
-
-        <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
-          <span></span><span></span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <div class="nav-scrim" id="navScrim" aria-hidden="true"></div>
 
   <main id="main">
     <!-- ============ HERO ============ -->
@@ -104,7 +54,7 @@
         </a>
       </nav>
 
-      <div class="spine hero-inner">
+      <div class="spine hero-inner hero-inner--centered">
         <div class="hero-copy">
           <h1 class="hero-title reveal">
             <span id="heroFirst">Cupid</span>
@@ -135,15 +85,6 @@
             <div class="hero-social" id="heroSocial"></div>
           </div>
         </div>
-      </div>
-
-      <div class="spine hero-foot">
-        <ul class="hero-meta reveal">
-          <li><span>Focus</span><strong id="heroFocus">AI / ML engineering</strong></li>
-          <li><span>Based in</span><strong id="heroBase">India</strong></li>
-          <li><span>Education</span><strong id="heroEducation">IIT Delhi · 2026</strong></li>
-          <li><span>Coordinates</span><strong>28.61° N · 77.20° E</strong></li>
-        </ul>
       </div>
     </section>
 
@@ -257,8 +198,7 @@
             <span class="kicker-line" aria-hidden="true"></span>
             <span>Arcade</span>
           </p>
-          <h2 class="section-title">Interactive <em>labs &amp; arcade.</em></h2>
-          <p class="section-note">Two neural network simulations, six mini-games — vanilla JS, zero dependencies.</p>
+          <h2 class="section-title"><em>Arcade.</em></h2>
         </header>
 
         <div class="arcade reveal">
@@ -396,7 +336,7 @@
             </svg>
           </div>
           <p class="contact-card-label">Profile</p>
-          <p class="contact-card-note">Read.Build.Learn.</p>
+          <p class="contact-card-note">Read. Build. Learn.</p>
           <p class="contact-location">
             <span id="contactLocation">India</span>
             <span class="sep" aria-hidden="true">·</span>
@@ -430,7 +370,7 @@
     </div>
   </div>
 
-  <script src="config.js?v=20261117-2"></script>
-  <script src="script.js?v=20261117-2"></script>
+  <script src="config.js?v=20261117-4"></script>
+  <script src="script.js?v=20261117-4"></script>
 </body>
 </html>
