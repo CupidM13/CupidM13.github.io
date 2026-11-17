@@ -567,18 +567,19 @@
     const tipAnchors = { a: null, b: null, c: null };
 
     const skyToggle = $('skyToggle');
-    let daylight = false;
-    try { daylight = localStorage.getItem('gardenSky') === 'day'; } catch (_) { /* optional storage */ }
+    let daylight = document.documentElement.dataset.landingSky === 'day';
 
     function syncSky() {
       hero.dataset.sky = daylight ? 'day' : 'night';
-      const label = daylight ? 'Switch to night' : 'Switch to daylight';
+      const label = daylight ? 'Dark mode (call the sun :)' : 'Light mode (call the moon :)';
       skyToggle.title = label;
       skyToggle.setAttribute('aria-label', label);
+      skyToggle.setAttribute('aria-pressed', String(daylight));
     }
     syncSky();
     skyToggle.addEventListener('click', () => {
       daylight = !daylight;
+      document.documentElement.dataset.landingSky = daylight ? 'day' : 'night';
       syncSky();
       try { localStorage.setItem('gardenSky', hero.dataset.sky); } catch (_) { /* optional storage */ }
       redrawGarden();
