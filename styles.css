@@ -3791,3 +3791,21 @@ canvas {
     animation: none;
   }
 }
+
+/* Peripheral geological illustrations preserve a quiet area behind the content. */
+.depth-vignette {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  shape-rendering: crispEdges;
+  opacity: .65;
+  -webkit-mask-image: linear-gradient(90deg, #000, transparent 24%, transparent 76%, #000);
+  mask-image: linear-gradient(90deg, #000, transparent 24%, transparent 76%, #000);
+}
+.depth-vignette--magma { opacity: .55; }
+@media (max-width: 640px) {
+  .depth-vignette { opacity: .35; }
+}

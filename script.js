@@ -613,6 +613,32 @@
 
       offctx.clearRect(0, 0, width, height);
 
+      // Pixel moon and distant woodland give the garden depth without crowding the tree.
+      const moonX = Math.round(width * 0.82 / P) * P;
+      const moonY = height * 0.16;
+      const moonR = Math.min(width * 0.035, 24);
+      for (let my = -moonR; my <= moonR; my += P) {
+        for (let mx = -moonR; mx <= moonR; mx += P) {
+          if (mx * mx + my * my > moonR * moonR) continue;
+          const shadow = (mx - moonR * 0.5) ** 2 + (my + moonR * 0.28) ** 2 < moonR ** 2;
+          offctx.fillStyle = shadow ? '#0c1915' : (random() > 0.3 ? '#728d78' : '#a8b497');
+          offctx.fillRect(moonX + mx, moonY + my, P, P);
+        }
+      }
+      // Layered silhouettes are concentrated at the edges to frame the central canopy.
+      for (let layer = 0; layer < 2; layer += 1) {
+        for (let n = 0; n < 18; n += 1) {
+          const x = width * n / 17;
+          const edge = Math.abs(x / width - 0.5) * 2;
+          const h = height * (0.04 + edge * 0.15) * (0.7 + random() * 0.3);
+          offctx.fillStyle = layer ? '#10251b' : '#0c1b15';
+          for (let y = 0; y < h; y += P * 2) {
+            const spread = (y / h) * h * 0.23;
+            offctx.fillRect(Math.round((x - spread) / P) * P, groundY - h + y, spread * 2 + P, P * 2);
+          }
+        }
+      }
+
       // 1. Sky stars / dust specks
       stars = [];
       const starCount = isMobile ? 35 : 70;
