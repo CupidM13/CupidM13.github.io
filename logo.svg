@@ -2,8 +2,8 @@
   <rect width="64" height="64" rx="15" fill="#111714"/>
   <path fill="#df3947" d="M28 11h-8v4h-8v8H8v13h4v8h8v8h8v4h8v-4h8v-8h8v-8h4V23h-4v-8h-8v-4h-8v4h-4v4h-4v-4h-4z"/>
   <path fill="#f06a67" d="M16 23h8v5h-8zm24-5h8v7h-8zM12 28h5v8h-5zm8 16h8v6h-8z"/>
-  <path d="M7 57L55 9" fill="none" stroke="#101714" stroke-width="9" stroke-linecap="square"/>
-  <path d="M7 57L55 9" fill="none" stroke="#f1d59b" stroke-width="4" stroke-linecap="square"/>
-  <path d="M57 7L51 21L43 13Z" fill="#f1d59b" stroke="#101714" stroke-width="2" stroke-linejoin="miter"/>
-  <path d="M10 50l8 3m-4-8 8 3" fill="none" stroke="#f1d59b" stroke-width="2.5" stroke-linecap="square"/>
+  <path d="M7 57L55 9" fill="none" stroke="#6c4833" stroke-width="9" stroke-linecap="square"/>
+  <path d="M7 57L55 9" fill="none" stroke="#b9c2c8" stroke-width="4" stroke-linecap="square"/>
+  <path d="M57 7L51 21L43 13Z" fill="#e1e7e9" stroke="#6c4833" stroke-width="2" stroke-linejoin="miter"/>
+  <path d="M10 50l8 3m-4-8 8 3" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="square"/>
 </svg>
