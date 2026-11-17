@@ -3884,3 +3884,20 @@ canvas {
 .hero[data-sky="day"] .sky-hint { color: #304c3f; }
 
 .sky-hint { line-height: 1.35; text-align: center; }
+
+.hero[data-sky="day"] .tree-note {
+  color: #20372d;
+  background: #fff8de;
+  border-color: #67765a;
+  --accent: #496044;
+  font-size: clamp(.625rem, 1vw, .75rem);
+  font-weight: 600;
+}
+.hero[data-sky="day"] .tree-note:is(:hover, :focus-visible) {
+  background: #fffdf4;
+  outline: 2px solid #32533c;
+  outline-offset: 1px;
+}
+@media (max-width: 360px) {
+  .hero[data-sky="day"] .tree-note-index { display: none; }
+}
