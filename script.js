@@ -1252,6 +1252,7 @@
   ];
 
   let activeGame = null;
+  let snakeCleanup = null;
 
   if (gameTabs) {
     games.forEach((game, index) => {
@@ -1272,6 +1273,11 @@
     const entry = games.find((game) => game.id === id);
     if (!entry || !gameStage) return;
     const isLab = Boolean(entry.lab);
+
+    if (snakeCleanup) {
+      snakeCleanup();
+      snakeCleanup = null;
+    }
 
     $$('.game-tab', gameTabs || document).forEach((tab) => {
       const selected = tab.dataset.id === id;
@@ -1630,11 +1636,12 @@
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     const grid = 18;
-    const stepDuration = 85;
+    const stepDuration = 65;
     const cols = canvas.width / grid;
     const rows = canvas.height / grid;
     let snake;
     let direction;
+    let pendingDirection = null;
     let food;
     let score;
     let best = 0;
@@ -1649,6 +1656,7 @@
     function reset() {
       snake = [{ x: 10, y: 10 }];
       direction = { x: 1, y: 0 };
+      pendingDirection = null;
       score = 0;
       over = false;
       placeFood();
@@ -1733,21 +1741,22 @@
       }
 
       const head = points[0];
+      const facing = pendingDirection || direction;
       ctx.fillStyle = p.accent;
       ctx.beginPath();
       ctx.arc(head.x, head.y, 8, 0, Math.PI * 2);
       ctx.fill();
-      const side = { x: -direction.y, y: direction.x };
+      const side = { x: -facing.y, y: facing.x };
       [1, -1].forEach((sign) => {
-        const eyeX = head.x + direction.x * 3 + side.x * 4 * sign;
-        const eyeY = head.y + direction.y * 3 + side.y * 4 * sign;
+        const eyeX = head.x + facing.x * 3 + side.x * 4 * sign;
+        const eyeY = head.y + facing.y * 3 + side.y * 4 * sign;
         ctx.fillStyle = '#f8f1df';
         ctx.beginPath();
         ctx.arc(eyeX, eyeY, 2, 0, Math.PI * 2);
         ctx.fill();
         ctx.fillStyle = '#14251d';
         ctx.beginPath();
-        ctx.arc(eyeX + direction.x, eyeY + direction.y, 0.9, 0, Math.PI * 2);
+        ctx.arc(eyeX + facing.x, eyeY + facing.y, 0.9, 0, Math.PI * 2);
         ctx.fill();
       });
       ctx.lineCap = 'butt';
@@ -1768,6 +1777,10 @@
     }
 
     function step() {
+      if (pendingDirection) {
+        direction = pendingDirection;
+        pendingDirection = null;
+      }
       previousSnake = snake.map((part) => ({ ...part }));
       const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
       const hitWall = head.x < 0 || head.x >= cols || head.y < 0 || head.y >= rows;
@@ -1815,6 +1828,15 @@
       animationFrame = window.requestAnimationFrame(animate);
     }
 
+    snakeCleanup = () => {
+      running = false;
+      if (loop) window.clearInterval(loop);
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+      loop = null;
+      animationFrame = 0;
+      snakeKeyHandler = null;
+    };
+
     $('snakeStart')?.addEventListener('click', start);
 
     const dpadMap = {
@@ -1824,41 +1846,62 @@
       right: { x: 1, y: 0 },
     };
 
+    function requestDirection(nextDirection) {
+      const from = pendingDirection || direction;
+      if (!nextDirection || (nextDirection.x === -from.x && nextDirection.y === -from.y)) return;
+      pendingDirection = nextDirection;
+      // Give immediate visual confirmation while the next grid step is queued.
+      draw(performance.now());
+    }
+
     document.querySelectorAll('#snakeDpad .dpad-btn').forEach((button) => {
       const handler = (event) => {
         event.preventDefault();
         if (!running) return;
-        const nextDirection = dpadMap[button.dataset.dir];
-        if (nextDirection && !(nextDirection.x === -direction.x && nextDirection.y === -direction.y)) {
-          direction = nextDirection;
-        }
+        requestDirection(dpadMap[button.dataset.dir]);
       };
-      button.addEventListener('touchstart', handler, { passive: false });
-      button.addEventListener('click', handler);
+      button.addEventListener('pointerdown', handler);
+      button.addEventListener('click', (event) => {
+        // Keep keyboard activation; pointer presses are handled at pointerdown.
+        if (event.detail === 0) handler(event);
+      });
     });
 
     let touchStart = null;
-    canvas.addEventListener('touchstart', (event) => {
-      const touch = event.touches[0];
-      touchStart = { x: touch.clientX, y: touch.clientY };
-    }, { passive: true });
+    canvas.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      touchStart = { x: event.clientX, y: event.clientY };
+      canvas.setPointerCapture?.(event.pointerId);
+    });
 
-    canvas.addEventListener('touchend', (event) => {
+    canvas.addEventListener('pointermove', (event) => {
       if (!touchStart || !running) return;
-      const touch = event.changedTouches[0];
-      const dx = touch.clientX - touchStart.x;
-      const dy = touch.clientY - touchStart.y;
+      const dx = event.clientX - touchStart.x;
+      const dy = event.clientY - touchStart.y;
       if (Math.abs(dx) < 20 && Math.abs(dy) < 20) return;
+      const nextDirection = Math.abs(dx) > Math.abs(dy)
+        ? (dx > 0 ? { x: 1, y: 0 } : { x: -1, y: 0 })
+        : (dy > 0 ? { x: 0, y: 1 } : { x: 0, y: -1 });
+      requestDirection(nextDirection);
+      touchStart = null;
+    });
+
+    canvas.addEventListener('pointerup', (event) => {
+      if (!touchStart || !running) return;
+      const dx = event.clientX - touchStart.x;
+      const dy = event.clientY - touchStart.y;
+      if (Math.abs(dx) < 20 && Math.abs(dy) < 20) {
+        touchStart = null;
+        return;
+      }
 
       let nextDirection;
       if (Math.abs(dx) > Math.abs(dy)) nextDirection = dx > 0 ? { x: 1, y: 0 } : { x: -1, y: 0 };
       else nextDirection = dy > 0 ? { x: 0, y: 1 } : { x: 0, y: -1 };
 
-      if (!(nextDirection.x === -direction.x && nextDirection.y === -direction.y)) {
-        direction = nextDirection;
-      }
+      requestDirection(nextDirection);
       touchStart = null;
-    }, { passive: true });
+    });
 
     snakeKeyHandler = (event) => {
       if (!running || activeGame !== 'snake') return;
@@ -1871,8 +1914,8 @@
         A: { x: -1, y: 0 }, D: { x: 1, y: 0 },
       };
       const nextDirection = map[event.key];
-      if (nextDirection && !(nextDirection.x === -direction.x && nextDirection.y === -direction.y)) {
-        direction = nextDirection;
+      if (nextDirection) {
+        requestDirection(nextDirection);
         event.preventDefault();
       }
     };
@@ -2103,7 +2146,8 @@
     let start = 0;
     let timeout;
 
-    box.addEventListener('click', () => {
+    function handleReactionInput(event) {
+      event.preventDefault();
       if (state === 'idle' || state === 'done') {
         state = 'waiting';
         box.className = 'reaction-box wait';
@@ -2112,9 +2156,9 @@
         const delay = 1500 + Math.random() * 3000;
         timeout = window.setTimeout(() => {
           state = 'go';
+          start = performance.now();
           box.className = 'reaction-box go';
           box.textContent = 'CLICK NOW';
-          start = performance.now();
         }, delay);
       } else if (state === 'waiting') {
         window.clearTimeout(timeout);
@@ -2123,12 +2167,19 @@
         box.textContent = 'Too early! Click to retry';
         if (result) result.textContent = 'You clicked too early. 😅';
       } else if (state === 'go') {
-        const ms = Math.round(performance.now() - start);
+        const receivedAt = performance.now();
+        const ms = Math.max(0, Math.round(receivedAt - start));
         state = 'done';
         box.className = 'reaction-box';
         box.textContent = 'Click to try again';
         if (result) result.textContent = `Your reaction time: ${ms} ms ${ms < 250 ? '⚡ Fast!' : ms < 400 ? '👍 Good' : '🐢 Slow'}`;
       }
+    }
+
+    box.addEventListener('pointerdown', handleReactionInput);
+    box.addEventListener('click', (event) => {
+      // Pointer input is handled on pointerdown for immediate touch and mouse response.
+      if (event.detail === 0) handleReactionInput(event);
     });
   }
 

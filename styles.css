@@ -2159,6 +2159,7 @@ canvas {
   font-size: 10px;
   color: var(--muted);
   cursor: pointer;
+  touch-action: none;
   transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease),
     color 0.3s var(--ease);
 }
@@ -2484,7 +2485,8 @@ canvas {
   text-transform: uppercase;
   color: var(--ink);
   cursor: pointer;
-  transition: background-color 0.4s var(--ease), border-color 0.4s var(--ease);
+  transition: none;
+  touch-action: manipulation;
 }
 
 .reaction-box:hover {
