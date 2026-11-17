@@ -2011,8 +2011,8 @@ canvas {
 
 .game-stage {
   position: relative;
-  width: 100%;
-  max-width: none;
+  width: min(100%, 300px);
+  max-width: 300px;
   min-width: 0;
   min-height: clamp(24rem, 58vh, 34rem);
   margin-inline: auto;
@@ -2030,8 +2030,8 @@ canvas {
 .game-stage .ttt-grid,
 .game-stage .game-canvas,
 .game-stage .reaction-box {
-  width: min(100%, 34rem);
-  max-width: 34rem;
+  width: 100%;
+  max-width: 300px;
   margin-inline: auto;
 }
 
@@ -2039,7 +2039,7 @@ canvas {
 .game-stage > .game-info,
 .game-stage > .game-row,
 .game-stage > .rps-choices {
-  width: min(100%, 38rem);
+  width: 100%;
   margin-inline: auto;
 }
 
