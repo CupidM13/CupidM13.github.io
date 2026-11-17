@@ -1702,10 +1702,16 @@
 
     function draw(now = performance.now()) {
       const p = palette();
-      ctx.fillStyle = p.canvas;
+      ctx.fillStyle = '#101416';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.strokeStyle = rgba(p.accent, 0.045);
+      for (let row = 0; row < rows; row += 1) {
+        for (let col = 0; col < cols; col += 1) {
+          ctx.fillStyle = (row + col) % 2 ? '#151a1d' : '#12171a';
+          ctx.fillRect(col * grid + 1, row * grid + 1, grid - 2, grid - 2);
+        }
+      }
+      ctx.strokeStyle = 'rgba(179, 193, 200, 0.045)';
       ctx.lineWidth = 1;
       for (let i = 0; i <= cols; i += 1) {
         ctx.beginPath();
@@ -1722,9 +1728,19 @@
 
       const fx = food.x * grid;
       const fy = food.y * grid;
-      ctx.fillStyle = p.rust;
+      ctx.fillStyle = 'rgba(0,0,0,.45)';
       ctx.beginPath();
-      ctx.arc(fx + grid / 2, fy + grid / 2 + 1, grid / 2 - 2.2, 0, Math.PI * 2);
+      ctx.ellipse(fx + 10, fy + 16, 7, 2.5, 0, 0, Math.PI * 2);
+      ctx.fill();
+      const apple = ctx.createRadialGradient(fx + 6, fy + 5, 1, fx + 10, fy + 10, 11);
+      apple.addColorStop(0, '#ffc17d');
+      apple.addColorStop(0.35, '#ef7055');
+      apple.addColorStop(1, '#902d3c');
+      ctx.fillStyle = apple;
+      ctx.beginPath();
+      ctx.moveTo(fx + 9, fy + 4);
+      ctx.bezierCurveTo(fx - 2, fy - 1, fx + 1, fy + 18, fx + 9, fy + 16);
+      ctx.bezierCurveTo(fx + 17, fy + 19, fx + 21, fy, fx + 9, fy + 4);
       ctx.fill();
       ctx.strokeStyle = 'rgba(255, 224, 195, 0.3)';
       ctx.lineWidth = 1;
@@ -1758,19 +1774,37 @@
         ctx.lineJoin = 'round';
         ctx.beginPath();
         points.forEach((point, index) => index ? ctx.lineTo(point.x, point.y) : ctx.moveTo(point.x, point.y));
-        ctx.strokeStyle = '#4b504d';
-        ctx.lineWidth = 14;
+        ctx.shadowColor = 'rgba(0,0,0,.6)';
+        ctx.shadowBlur = 4;
+        ctx.shadowOffsetY = 3;
+        ctx.strokeStyle = '#73513a';
+        ctx.lineWidth = 15;
         ctx.stroke();
-        ctx.strokeStyle = p.accent;
-        ctx.lineWidth = 10;
+        ctx.shadowBlur = 0;
+        ctx.shadowOffsetY = 0;
+        ctx.strokeStyle = '#d7ac6c';
+        ctx.lineWidth = 11;
         ctx.stroke();
+        ctx.strokeStyle = '#f3d49a';
+        ctx.lineWidth = 3;
+        ctx.stroke();
+        points.slice(1).forEach((point, index) => {
+          ctx.fillStyle = index % 2 ? '#bd894e' : '#edca8b';
+          ctx.beginPath();
+          ctx.ellipse(point.x, point.y, 2, 2.5, 0, 0, Math.PI * 2);
+          ctx.fill();
+        });
       }
 
       const head = points[0];
       const facing = pendingDirection || direction;
-      ctx.fillStyle = p.accent;
+      const skin = ctx.createRadialGradient(head.x - 3, head.y - 4, 1, head.x, head.y, 10);
+      skin.addColorStop(0, '#ffe2a6');
+      skin.addColorStop(0.65, '#d9ae71');
+      skin.addColorStop(1, '#9d6a40');
+      ctx.fillStyle = skin;
       ctx.beginPath();
-      ctx.arc(head.x, head.y, 8, 0, Math.PI * 2);
+      ctx.ellipse(head.x, head.y, 9, 7.5, Math.atan2(facing.y, facing.x), 0, Math.PI * 2);
       ctx.fill();
       const side = { x: -facing.y, y: facing.x };
       [1, -1].forEach((sign) => {
@@ -1814,6 +1848,7 @@
 
       if (hitWall || hitSelf) {
         running = false;
+      canvas.classList.remove('is-playing');
         over = true;
         window.clearInterval(loop);
         if (animationFrame) window.cancelAnimationFrame(animationFrame);
@@ -1850,12 +1885,14 @@
       if (loop) window.clearInterval(loop);
       if (animationFrame) window.cancelAnimationFrame(animationFrame);
       running = true;
+      canvas.classList.add('is-playing');
       loop = window.setInterval(step, stepDuration);
       animationFrame = window.requestAnimationFrame(animate);
     }
 
     snakeCleanup = () => {
       running = false;
+      canvas.classList.remove('is-playing');
       if (loop) window.clearInterval(loop);
       if (animationFrame) window.cancelAnimationFrame(animationFrame);
       loop = null;
@@ -1882,8 +1919,8 @@
 
     document.querySelectorAll('#snakeDpad .dpad-btn').forEach((button) => {
       const handler = (event) => {
-        event.preventDefault();
         if (!running) return;
+        event.preventDefault();
         requestDirection(dpadMap[button.dataset.dir]);
       };
       button.addEventListener('pointerdown', handler);
@@ -1895,7 +1932,7 @@
 
     let touchStart = null;
     canvas.addEventListener('pointerdown', (event) => {
-      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      if (!running || !event.isPrimary || (event.pointerType === 'mouse' && event.button !== 0)) return;
       touchStart = { x: event.clientX, y: event.clientY };
       canvas.setPointerCapture?.(event.pointerId);
     });
@@ -1911,6 +1948,8 @@
       requestDirection(nextDirection);
       touchStart = null;
     });
+
+    canvas.addEventListener('pointercancel', () => { touchStart = null; });
 
     canvas.addEventListener('pointerup', (event) => {
       if (!touchStart || !running) return;

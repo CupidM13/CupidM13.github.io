@@ -3809,3 +3809,18 @@ canvas {
 @media (max-width: 640px) {
   .depth-vignette { opacity: .35; }
 }
+
+/* The board only owns touch gestures during a running game. */
+.game-stage #snakeCanvas {
+  width: min(100%, 300px);
+  max-width: 300px;
+  touch-action: pan-y;
+  border: 1px solid #42494b;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.28);
+}
+.game-stage #snakeCanvas.is-playing { touch-action: none; }
+.cupid-logo { display: block; flex: 0 0 auto; width: 40px; height: 40px; }
+
+#snakeDpad .dpad-btn { touch-action: pan-y; }
+.game-stage:has(#snakeCanvas.is-playing) #snakeDpad .dpad-btn { touch-action: none; }
