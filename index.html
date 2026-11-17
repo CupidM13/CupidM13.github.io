@@ -14,10 +14,26 @@
     (function () {
       try {
         var navigation = performance.getEntriesByType('navigation')[0];
-        if (navigation && navigation.type === 'reload') {
+        var legacyNavigation = performance.navigation;
+        var isReload = (navigation && navigation.type === 'reload')
+          || (legacyNavigation && legacyNavigation.type === 1);
+        if (isReload) {
           history.scrollRestoration = 'manual';
           window.addEventListener('pageshow', function () {
+            var html = document.documentElement;
+            var priorScrollBehavior = html.style.scrollBehavior;
+            html.style.scrollBehavior = 'auto';
             window.scrollTo(0, 0);
+            html.scrollTop = 0;
+            document.body.scrollTop = 0;
+            requestAnimationFrame(function () {
+              requestAnimationFrame(function () {
+                window.scrollTo(0, 0);
+                html.scrollTop = 0;
+                document.body.scrollTop = 0;
+                html.style.scrollBehavior = priorScrollBehavior;
+              });
+            });
           }, { once: true });
         }
       } catch (error) { /* Keep browser defaults if navigation APIs are unavailable. */ }
@@ -362,6 +378,6 @@
   </div>
 
   <script src="config.js?v=20261118-1"></script>
-  <script src="script.js?v=20261118-6"></script>
+  <script src="script.js?v=20261118-7"></script>
 </body>
 </html>

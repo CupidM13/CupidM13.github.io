@@ -586,7 +586,6 @@
       const scale = isMobile ? 0.88 : isTablet ? 0.92 : 1.15;
       const P = isMobile ? 2 : 2.5; // pixel unit
 
-      const treeOffset = Math.min(44, Math.round(height * 0.055));
       const groundY = Math.round(height * 0.94);
       const rootX = Math.round(width * 0.50);
       const treeH = Math.min(Math.round(height * 0.88), isMobile ? 460 : 680);
@@ -595,7 +594,7 @@
       if (greeting) {
         const greetingTop = isMobile
           ? Math.max(78, topY - 48)
-          : Math.max(64, topY - treeOffset - 88);
+          : Math.max(64, topY - 88);
         greeting.style.top = `${greetingTop}px`;
       }
 
