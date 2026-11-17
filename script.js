@@ -194,9 +194,11 @@
   setText('heroFocus', S.role || 'AI / ML engineering');
   setText('heroBase', baseLocation);
 
+  // Bio section in background (below tree) - uses same element IDs as original hero
   $$('[data-availability-text]').forEach((el) => {
     el.textContent = isAvailable ? 'Open to work' : 'Building & learning';
   });
+
   if (!isAvailable) {
     $$('.status-badge, .hero-eyebrow .status').forEach((el) => el.classList.add('is-muted'));
   }

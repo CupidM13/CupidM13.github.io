@@ -752,6 +752,91 @@ canvas {
   49%, 100% { opacity: 0; }
 }
 
+/* Bio section (in background, below tree) */
+.hero-with-bio .bio-spine {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.hero-with-bio .notes-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+.hero-with-bio .bio-copy {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.hero-with-bio .bio-title span {
+  display: block;
+}
+
+.hero-with-bio .bio-role {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-height: 1.7em;
+  margin-top: 20px;
+}
+
+/* Bio after tree section */
+.hero-with-bio .bio-after-tree {
+  margin-top: 60px;
+  padding-top: 48px;
+  border-top: 1px solid var(--line-strong);
+}
+
+.hero-with-bio .bio-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px 18px;
+  margin-top: 30px;
+}
+
+.hero-with-bio .bio-contact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.hero-with-bio .bio-social {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow: visible;
+  text-align: center;
+}
+
+/* Mobile tweaks for bio section */
+@media (max-width: 900px) {
+  .hero-with-bio .bio-spine {
+    margin-top: 48px;
+  }
+  
+  .hero-with-bio .bio-contact {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-with-bio .bio-spine {
+    margin-top: 40px;
+  }
+  
+  .hero-with-bio .bio-copy {
+    max-width: none;
+    padding: 0 24px;
+  }
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
