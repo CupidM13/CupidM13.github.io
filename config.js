@@ -63,9 +63,9 @@ window.SITE = {
   ],
 
   skills: {
-    "ML & AI": ["Python", "NumPy", "Pandas", "scikit-learn", "PyTorch (learning)", "LLMs & RAG (learning)"],
-    "Programming": ["Python", "JavaScript", "SQL", "C++ (basics)"],
-    "Tools": ["Git", "Jupyter", "Linux", "Docker (learning)"],
+    "AI & ML": ["Python", "NumPy", "Pandas", "scikit-learn", "PyTorch", "LLMs & RAG", "Agentic AI", "Automation"],
+    "Programming": ["Python", "JavaScript", "SQL"],
+    "Tools": ["Git", "Jupyter", "Linux", "Docker"],
     "Domain": ["Quantitative trading", "Time-series", "Market microstructure", "Crude oil futures"],
     "Coursework": ["Data Structures & Algorithms", "Calculus", "Differential Equations", "Linear Algebra", "Macroeconomics", "Bioinformatics"]
   }

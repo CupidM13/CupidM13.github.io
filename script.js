@@ -380,21 +380,6 @@
         </div>`;
     }).join('');
 
-    const learning = Object.values(skills)
-      .flat()
-      .filter((item) => typeof item === 'string' && /\(learning\)/i.test(item))
-      .map((item) => item.replace(/\s*\(learning\)/i, '').trim());
-
-    const note = $('learningNote');
-    if (note && learning.length) {
-      const phrase = learning.length === 1
-        ? learning[0]
-        : learning.length === 2
-          ? `${learning[0]} and ${learning[1]}`
-          : `${learning.slice(0, -1).join(', ')}, and ${learning[learning.length - 1]}`;
-      note.innerHTML = `<span class="note-label">Presently learning</span>${esc(phrase)}.`;
-      note.hidden = false;
-    }
   }
 
   renderEducation();
