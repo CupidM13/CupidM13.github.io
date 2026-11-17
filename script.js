@@ -593,7 +593,12 @@
       const treeH = Math.min(Math.round(height * 0.88), isMobile ? 460 : 680);
       const topY = groundY - treeH;
       const greeting = document.querySelector('.hero-greeting');
-      if (greeting) greeting.style.top = `${Math.max(64, topY - treeOffset - 88)}px`;
+      if (greeting) {
+        const greetingTop = isMobile
+          ? Math.max(78, topY - 48)
+          : Math.max(64, topY - treeOffset - 88);
+        greeting.style.top = `${greetingTop}px`;
+      }
 
       // Color palette (Dark Obsidian & Moss Emerald)
       const trunkColor = '#0d2217';
@@ -986,7 +991,7 @@
 
     function measure() {
       const rect = stage.getBoundingClientRect();
-      width = Math.max(360, Math.round(rect.width));
+      width = Math.max(1, Math.round(rect.width));
       height = Math.max(420, Math.round(rect.height));
       dpr = Math.min(window.devicePixelRatio || 1, 2);
 
