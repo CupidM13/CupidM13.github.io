@@ -581,22 +581,21 @@
       if (!offctx) return;
 
       const random = makeRandom(0x42f09a);
-      const compactLandscape = width < 900 && height < 520;
-      const isMobile = width < 680 || compactLandscape;
+      const isMobile = width < 680;
       const isTablet = width >= 680 && width < 1140;
       const scale = isMobile
         ? Math.min(1.1, Math.max(0.88, width / 360))
         : isTablet ? 0.92 : 1.15;
       const P = isMobile ? 2 : 2.5; // pixel unit
 
-      const groundY = Math.round(height * (compactLandscape ? 0.78 : 0.94));
+      const groundY = Math.round(height * 0.94);
       const rootX = Math.round(width * 0.50);
       // Keep tree and greeting positions proportional to the hero on every screen.
-      const treeH = Math.round(height * (compactLandscape ? 0.42 : isMobile ? 0.76 : 0.68));
+      const treeH = Math.round(height * (isMobile ? 0.76 : 0.68));
       const topY = groundY - treeH;
       const greeting = document.querySelector('.hero-greeting');
       if (greeting) {
-        const greetingTop = topY - height * (compactLandscape ? 0.055 : isMobile ? 0.06 : 0.08);
+        const greetingTop = topY - height * (isMobile ? 0.06 : 0.08);
         greeting.style.top = `${greetingTop}px`;
       }
 
