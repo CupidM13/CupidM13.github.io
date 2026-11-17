@@ -583,11 +583,11 @@
       const random = makeRandom(0x42f09a);
       const isMobile = width < 680;
       const isTablet = width >= 680 && width < 1140;
-      const scale = isMobile ? 0.68 : isTablet ? 0.92 : 1.15;
+      const scale = isMobile ? 0.88 : isTablet ? 0.92 : 1.15;
       const P = isMobile ? 2 : 2.5; // pixel unit
 
       const treeOffset = Math.min(44, Math.round(height * 0.055));
-      const groundY = Math.round(height * 0.94) + treeOffset;
+      const groundY = Math.round(height * 0.94);
       const rootX = Math.round(width * 0.50);
       const treeH = Math.min(Math.round(height * 0.88), isMobile ? 460 : 680);
       const topY = groundY - treeH;
@@ -914,9 +914,9 @@
       // Subtle organic sway on offscreen canvas
       const sway = Math.sin(t * 0.35) * 0.0018 + (pointer.active ? pointer.x * 0.003 : 0);
       ctx.save();
-      ctx.translate(width * 0.77, height * 0.94);
+      ctx.translate(width * 0.5, height * 0.94);
       ctx.rotate(sway);
-      ctx.translate(-width * 0.77, -height * 0.94);
+      ctx.translate(-width * 0.5, -height * 0.94);
       ctx.drawImage(offscreen, 0, 0, width, height);
       ctx.restore();
 

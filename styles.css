@@ -3173,6 +3173,18 @@ canvas {
 }
 
 @media (max-width: 900px) {
+  .hero {
+    height: 100svh;
+    min-height: 100svh;
+    background: linear-gradient(180deg, #050806 0%, #09110e 72%, #14150f 88%, #211a11 100%);
+  }
+
+  .notes {
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(93, 105, 59, 0.14), transparent 48%),
+      linear-gradient(180deg, #211a11 0%, #1d1911 8%, #17120d 58%, #111311 100%);
+  }
+
   :root {
     --header-h: 62px;
   }
@@ -3416,7 +3428,6 @@ canvas {
   .hero {
     padding-top: calc(var(--header-h) + 64px);
     padding-bottom: 20px;
-    min-height: 92svh;
   }
 
   .hero-eyebrow {
