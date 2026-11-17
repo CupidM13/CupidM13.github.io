@@ -36,18 +36,29 @@ window.SITE = {
       role: "Energy Market Analyst",
       org: "Futures First",
       type: "Full-time",
-      years: "Jun 2026 – Sep 2026"
+      years: "Jun 2026 – Sep 2026",
+      details: [
+        "Conducted fundamental research on crude oil futures and analyzed opportunities across outright and multi-leg spread structures.",
+        "Evaluated automated execution parameters across major trading sessions to support efficient execution.",
+        "Built and deployed an internal analytics tool that used historical and live market data to rank hedge candidates for crude-oil futures strategies, with interactive charts and statistical analysis across selectable time intervals."
+      ]
     },
     {
       role: "Laboratory Teaching Assistant",
       org: "Indian Institute of Technology, Delhi",
-      years: "Aug 2025 – Nov 2025"
+      years: "Aug 2025 – Nov 2025",
+      details: [
+        "Prepared and ran experiments for 60+ students, explained procedures, and analyzed experimental data for the Bioseparation Engineering course."
+      ]
     },
     {
       role: "Educational Video Creator",
       org: "YouTube",
       type: "Self-employed",
-      years: "May 2024 – Jun 2024"
+      years: "May 2024 – Jun 2024",
+      details: [
+        "Guided JEE & NEET aspirants and gained 2000+ high engagement subscribers."
+      ]
     }
   ],
 

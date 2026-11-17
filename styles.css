@@ -615,6 +615,7 @@ canvas {
   min-height: 100svh;
   padding-top: clamp(36px, 5vw, 64px);
   padding-bottom: clamp(18px, 2.4vw, 30px);
+  background: linear-gradient(180deg, #050806 0%, #09110e 100%);
   overflow: hidden;
 }
 
@@ -624,6 +625,23 @@ canvas {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+}
+
+.hero-greeting {
+  position: absolute;
+  z-index: 2;
+  top: 10%;
+  left: 50%;
+  margin: 0;
+  transform: translate(-50%, -100%);
+  color: var(--accent);
+  font-family: var(--serif);
+  font-size: clamp(1.35rem, 2.3vw, 1.8rem);
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+  text-shadow: 0 2px 16px var(--canvas);
 }
 
 .hero-grid-lines {
@@ -1211,6 +1229,15 @@ canvas {
   background: var(--line-strong);
 }
 
+.kicker-reference {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 .section-title {
   max-width: 15ch;
   margin-top: 22px;
@@ -1234,12 +1261,77 @@ canvas {
   color: var(--muted);
 }
 
+.rail-note-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.rail-note-row .section-note {
+  white-space: nowrap;
+  margin-top: 0;
+}
+
 /* ============================================================
    BACKGROUND — FIELD NOTES
    ============================================================ */
 .notes {
+  --canvas: #15110d;
+  --surface: #201910;
+  --surface-2: #2c2116;
+  --card: #1b1510;
+  --ink: #f0e4d0;
+  --ink-soft: #d7c3a6;
+  --muted: #ae9877;
+  --line: rgba(220, 187, 139, 0.15);
+  --line-strong: rgba(220, 187, 139, 0.3);
+  --accent: #c9995e;
+  --accent-soft: rgba(201, 153, 94, 0.16);
+  --rust: #c2764b;
+  --green: #ae9877;
+  --forest: #38291b;
+  --forest-2: #21180f;
+  --peach: #c18c52;
   padding: clamp(36px, 4.5vw, 56px) 0;
   border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(93, 105, 59, 0.14), transparent 48%),
+    linear-gradient(180deg, #211a11 0%, #1d1911 8%, #17120d 58%, #111311 100%);
+  isolation: isolate;
+}
+
+.notes::before,
+.section--arcade::before,
+.section--arcade::after,
+.contact::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  background-repeat: repeat;
+  animation: strata-drift 24s linear infinite alternate;
+}
+
+.notes::before {
+  top: 0;
+  height: 88px;
+  opacity: 0.52;
+  background-image:
+    linear-gradient(180deg, rgba(110, 88, 53, 0.52), rgba(49, 45, 29, 0.34) 45%, transparent),
+    repeating-linear-gradient(90deg, transparent 0 16px, rgba(124, 96, 57, 0.54) 16px 23px, transparent 23px 44px, rgba(49, 47, 31, 0.65) 44px 58px, transparent 58px 78px),
+    repeating-linear-gradient(0deg, transparent 0 7px, rgba(65, 58, 37, 0.8) 7px 14px, transparent 14px 23px),
+    radial-gradient(ellipse at 18% 62%, rgba(171, 137, 83, 0.5) 0 2px, transparent 3px),
+    radial-gradient(ellipse at 72% 30%, rgba(125, 111, 72, 0.44) 0 2px, transparent 3px);
+  background-size: auto, 156px 88px, 100% 31px, 47px 33px, 61px 41px;
+}
+
+@keyframes strata-drift {
+  from { background-position: 0 0, 0 0, 0 0; }
+  to { background-position: 0 0, 52px 0, 0 15px; }
 }
 
 .notes-grid {
@@ -1255,14 +1347,27 @@ canvas {
 }
 
 .notes-rail .section-title {
-  max-width: 11ch;
+  max-width: none;
+  white-space: nowrap;
+  text-shadow: 0 3px 16px rgba(8, 6, 4, 0.82), 0 0 32px rgba(8, 6, 4, 0.48);
+}
+
+.rail-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.rail-title-row .section-title {
+  margin-top: 0;
 }
 
 .rail-fig {
   display: flex;
-  align-items: flex-end;
-  gap: 14px;
-  margin-top: 20px;
+  align-items: center;
+  gap: 0;
+  margin-top: 0;
   color: var(--ink);
 }
 
@@ -1495,6 +1600,16 @@ canvas {
   padding-top: 2px;
 }
 
+.experience-details {
+  display: grid;
+  gap: 7px;
+  margin: 14px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
 .meta-pair dt {
   font-family: var(--mono);
   font-size: 9px;
@@ -1659,13 +1774,66 @@ canvas {
    ARCADE — DEEP FOREST CONSOLE
    ============================================================ */
 .section--arcade {
+  --canvas: #090b0a;
+  --surface: #131615;
+  --surface-2: #1c1f1d;
+  --card: #0e100f;
+  --ink: #e5e4de;
+  --ink-soft: #c8c8c1;
+  --muted: #a0a19a;
+  --line: rgba(210, 211, 203, 0.14);
+  --line-strong: rgba(210, 211, 203, 0.28);
+  --accent: #b9bbb4;
+  --accent-soft: rgba(185, 187, 180, 0.14);
+  --rust: #c08054;
+  --green: #aeb0a8;
+  --forest: #292c2a;
+  --forest-2: #1a1c1b;
+  --cream: #e5e4de;
+  --cream-dim: #bdbeb7;
+  --peach: #b0b2ab;
+  padding-top: clamp(16px, 2.2vw, 28px);
+  padding-bottom: clamp(20px, 2.8vw, 34px);
   overflow: clip;
   border-block: 1px solid rgba(241, 235, 218, 0.12);
   background:
-    radial-gradient(90% 70% at 12% 0%, rgba(231, 179, 148, 0.1), transparent 58%),
-    radial-gradient(80% 80% at 100% 100%, rgba(0, 0, 0, 0.32), transparent 62%),
-    var(--forest);
+    radial-gradient(ellipse at 76% 48%, rgba(47, 51, 49, 0.24), transparent 44%),
+    repeating-linear-gradient(180deg, transparent 0 74px, rgba(103, 106, 101, 0.08) 74px 77px, transparent 77px 124px),
+    linear-gradient(180deg, #111311 0%, #0b0d0c 18%, #070808 58%, #0b0d0c 100%);
   color: var(--cream);
+  isolation: isolate;
+}
+
+.section--arcade::before,
+.section--arcade::after {
+  height: 92px;
+  opacity: 0.76;
+  background-size: 100% 100%, 152px 72px, 100% 28px, 82px 61px;
+}
+
+.section--arcade::before {
+  top: 0;
+  clip-path: polygon(0 0, 100% 0, 100% 58%, 96% 58%, 94% 73%, 89% 73%, 87% 62%, 80% 62%, 78% 82%, 72% 82%, 69% 68%, 62% 68%, 60% 87%, 53% 87%, 50% 68%, 44% 68%, 42% 76%, 35% 76%, 32% 60%, 26% 60%, 23% 80%, 17% 80%, 14% 63%, 8% 63%, 6% 74%, 0 74%);
+  background-image:
+    linear-gradient(180deg, rgba(96, 100, 94, 0.48), rgba(29, 32, 30, 0.92)),
+    repeating-linear-gradient(90deg, transparent 0 24px, rgba(117, 120, 113, 0.6) 24px 36px, transparent 36px 56px, rgba(46, 49, 46, 0.8) 56px 78px),
+    repeating-linear-gradient(0deg, transparent 0 9px, rgba(72, 75, 71, 0.8) 9px 18px, transparent 18px 27px),
+    radial-gradient(ellipse at 25% 45%, rgba(153, 157, 147, 0.54) 0 2px, transparent 4px);
+}
+
+.section--arcade::after {
+  bottom: 0;
+  height: 112px;
+  clip-path: polygon(0 38%, 6% 38%, 8% 24%, 15% 24%, 18% 43%, 25% 43%, 28% 18%, 34% 18%, 38% 40%, 44% 40%, 48% 22%, 55% 22%, 58% 44%, 64% 44%, 68% 17%, 75% 17%, 78% 39%, 84% 39%, 88% 20%, 94% 20%, 97% 38%, 100% 38%, 100% 100%, 0 100%);
+  background-image:
+    linear-gradient(180deg, rgba(38, 41, 39, 0.86), #090b0a),
+    repeating-linear-gradient(90deg, transparent 0 22px, rgba(93, 98, 91, 0.56) 22px 33px, transparent 33px 54px, rgba(39, 43, 40, 0.88) 54px 76px),
+    repeating-linear-gradient(0deg, transparent 0 8px, rgba(73, 77, 72, 0.72) 8px 17px, transparent 17px 26px),
+    radial-gradient(ellipse at 58% 35%, rgba(140, 145, 135, 0.42) 0 2px, transparent 4px);
+}
+
+.section--arcade .section-head {
+  margin-bottom: clamp(12px, 1.8vw, 20px);
 }
 
 .arcade-stars {
@@ -1704,9 +1872,13 @@ canvas {
 
 .arcade-frame {
   display: grid;
-  grid-template-columns: 222px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 222px) minmax(0, 1fr);
   gap: 0 14px;
-  padding: 10px;
+  width: min(100%, 1080px);
+  min-height: 620px;
+  min-width: 0;
+  margin-inline: auto;
+  padding: 8px;
   border: 1px solid rgba(241, 235, 218, 0.2);
   border-radius: 18px;
   background: rgba(0, 0, 0, 0.14);
@@ -1720,7 +1892,7 @@ canvas {
   align-items: center;
   justify-content: space-between;
   gap: 8px 18px;
-  padding: 4px 8px 14px;
+  padding: 4px 8px 9px;
   font-family: var(--mono);
   font-size: 9.5px;
   letter-spacing: 0.14em;
@@ -1733,6 +1905,7 @@ canvas {
   grid-template-columns: 1fr;
   align-content: start;
   gap: 5px;
+  min-width: 0;
   padding: 2px 14px 2px 0;
   border-right: 1px solid rgba(241, 235, 218, 0.14);
   border-bottom: 0;
@@ -1782,8 +1955,11 @@ canvas {
 .arcade-screen {
   position: relative;
   grid-column: 2;
+  width: 100%;
+  min-height: 520px;
+  min-width: 0;
   margin-top: 0;
-  padding: clamp(20px, 3vw, 30px);
+  padding: clamp(14px, 2vw, 22px);
   border-radius: 11px;
   background: var(--card);
   color: var(--ink);
@@ -1828,6 +2004,35 @@ canvas {
 
 .game-stage {
   position: relative;
+  min-width: 0;
+  width: 100%;
+  min-height: 470px;
+}
+
+.game-stage > * {
+  max-width: 100%;
+}
+
+.game-stage .game-canvas {
+  width: min(100%, 380px);
+}
+
+.game-stage .memory-grid,
+.game-stage .ttt-grid,
+.game-stage .game-canvas,
+.game-stage .reaction-box {
+  width: min(100%, 360px);
+  max-width: 360px;
+  margin-inline: auto;
+}
+
+.game-stage .canvas-wrap {
+  width: 100%;
+}
+
+.game-stage .canvas-wrap canvas {
+  display: block;
+  max-width: 100%;
 }
 
 .game-stage h3 {
@@ -2337,7 +2542,7 @@ canvas {
   align-items: center;
   justify-content: space-between;
   gap: 8px 16px;
-  padding: 15px 8px 4px;
+  padding: 10px 8px 2px;
   font-family: var(--mono);
   font-size: 9.5px;
   letter-spacing: 0.11em;
@@ -2349,8 +2554,102 @@ canvas {
    ============================================================ */
 .contact {
   position: relative;
-  padding-top: clamp(80px, 10vw, 130px);
+  padding-top: clamp(28px, 3.5vw, 46px);
   overflow: clip;
+  --accent: #ef9a58;
+  --accent-soft: rgba(239, 154, 88, 0.16);
+  --muted: #c0a18e;
+  --line: rgba(244, 190, 153, 0.15);
+  --line-strong: rgba(244, 190, 153, 0.3);
+  background:
+    radial-gradient(ellipse at 50% 105%, rgba(190, 44, 12, 0.2), transparent 44%),
+    linear-gradient(180deg, #0b0d0c 0%, #100b09 55%, #160906 100%);
+  isolation: isolate;
+}
+
+.contact::before {
+  bottom: 0;
+  height: 176px;
+  opacity: 0.78;
+  clip-path: polygon(0 44%, 7% 44%, 10% 34%, 17% 34%, 21% 49%, 29% 49%, 33% 31%, 40% 31%, 44% 52%, 51% 52%, 55% 29%, 63% 29%, 67% 48%, 75% 48%, 79% 32%, 86% 32%, 90% 50%, 96% 50%, 100% 39%, 100% 100%, 0 100%);
+  background-image:
+    radial-gradient(ellipse at 50% 96%, rgba(255, 76, 20, 0.64), transparent 52%),
+    linear-gradient(0deg, rgba(97, 22, 11, 0.96), rgba(38, 15, 12, 0.92) 55%, transparent),
+    repeating-linear-gradient(90deg, transparent 0 14px, rgba(215, 65, 24, 0.72) 14px 21px, transparent 21px 38px, rgba(94, 34, 20, 0.88) 38px 52px),
+    repeating-linear-gradient(0deg, transparent 0 8px, rgba(120, 35, 16, 0.82) 8px 16px, transparent 16px 27px),
+    repeating-linear-gradient(168deg, transparent 0 24px, rgba(255, 100, 30, 0.78) 24px 27px, transparent 27px 42px);
+  background-size: 100% 100%, 100% 100%, 138px 100%, 100% 54px, 188px 80px;
+  animation: magma-pulse 5s ease-in-out infinite alternate, strata-drift 19s linear infinite alternate;
+}
+
+/* Custom pixel illustrations replace the rough repeating texture layers. */
+.notes::before,
+.section--arcade::before,
+.section--arcade::after,
+.contact::before {
+  display: none;
+}
+
+.earth-art {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  pointer-events: none;
+  shape-rendering: crispEdges;
+}
+
+.earth-art--soil {
+  top: 0;
+  height: 205px;
+  opacity: 0.74;
+  animation: soil-shift 18s ease-in-out infinite alternate;
+}
+
+.earth-art--rock {
+  top: 0;
+  height: 170px;
+  opacity: 0.52;
+  animation: rock-shift 24s ease-in-out infinite alternate;
+}
+
+.earth-art--water {
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  height: 150px;
+  opacity: 0.7;
+  transform: translateX(-50%);
+  animation: water-drift 8s ease-in-out infinite alternate;
+}
+
+.earth-critter--worm { animation: critter-wiggle 3.6s ease-in-out infinite alternate; transform-origin: 570px 82px; }
+.earth-critter--bat { animation: critter-flit 2.8s ease-in-out infinite alternate; }
+.earth-critter--angler { animation: critter-wiggle 4s ease-in-out infinite alternate; transform-origin: 700px 120px; }
+.earth-critter--salamander { animation: critter-wiggle 2.4s ease-in-out infinite alternate; }
+.earth-critter--moth { animation: critter-flit 2s ease-in-out infinite alternate; }
+
+.earth-art--magma {
+  bottom: 160px;
+  height: 270px;
+  opacity: 0.66;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 100%);
+  animation: magma-glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes soil-shift { to { transform: translateY(5px); } }
+@keyframes rock-shift { to { transform: translateY(-4px); } }
+@keyframes water-drift { to { translate: 0 -4px; } }
+@keyframes critter-wiggle { to { translate: 0 -3px; } }
+@keyframes critter-flit { to { translate: 0 -5px; } }
+@keyframes fish-drift { to { translate: 10px 0; } }
+@keyframes magma-glow { from { filter: brightness(.82); } to { filter: brightness(1.16); } }
+
+@keyframes magma-pulse {
+  from { filter: brightness(0.82); }
+  to { filter: brightness(1.14); }
 }
 
 .contact-dots {
@@ -2508,7 +2807,7 @@ canvas {
 }
 
 .contact-link:hover {
-  background: var(--forest);
+  background: #3b1b11;
   color: var(--cream);
 }
 
@@ -2559,8 +2858,7 @@ canvas {
   padding: 26px;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  background:
-    linear-gradient(160deg, var(--surface), var(--card) 62%);
+  background: linear-gradient(160deg, #241710, #130d0a 68%);
 }
 
 .contact-card-art {
@@ -2568,8 +2866,8 @@ canvas {
   right: -22px;
   bottom: -56px;
   width: 190px;
-  color: var(--ink);
-  opacity: 0.55;
+  color: #d58c55;
+  opacity: 0.68;
   pointer-events: none;
 }
 
@@ -2840,20 +3138,23 @@ canvas {
   }
 
   .rail-sticky .section-kicker,
-  .rail-sticky .section-title,
-  .rail-sticky .section-note {
+  .rail-sticky .section-title {
     grid-column: 1;
   }
 
+  .rail-note-row {
+    grid-column: 1;
+    justify-content: flex-start;
+    gap: 18px;
+  }
+
   .rail-fig {
-    grid-column: 2;
-    grid-row: 1 / span 3;
     align-self: end;
-    margin-top: 0;
   }
 
   .rail-fig .sprig {
-    width: 78px;
+    width: 38px;
+    height: 57px;
   }
 
   .rail-fig figcaption {
@@ -3193,8 +3494,23 @@ canvas {
     display: block;
   }
 
+  .rail-note-row {
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .rail-note-row .section-note {
+    font-size: clamp(7px, 2.15vw, 10px);
+    letter-spacing: 0.035em;
+  }
+
+  .rail-note-row .rail-fig .sprig {
+    width: 38px;
+    height: 57px;
+  }
+
   .rail-fig {
-    display: none;
+    display: flex;
   }
 
   .entry-summary {

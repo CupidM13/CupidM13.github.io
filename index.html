@@ -42,6 +42,8 @@
         <canvas id="gardenCanvas"></canvas>
       </div>
 
+      <p class="hero-greeting">hi, I’m cupid.</p>
+
       <nav class="tree-notes" aria-label="Jump to a section">
         <a class="tree-note tree-note--a" href="#background">
           <span class="tree-note-index">01</span><span>background</span>
@@ -57,6 +59,18 @@
 
     <!-- ============ BACKGROUND - WITH BIO & INFO ============ -->
     <section class="section notes hero-with-bio" id="background">
+      <svg class="earth-art earth-art--soil" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
+        <path fill="#211c13" d="M0 0h1200v34l-32 8h-48l-24 14h-55l-17 17h-61l-25 20h-57l-20 18h-90l-16 17h-86l-26-16h-73l-22-19h-82l-17-18h-95l-19-16h-75l-28-13H0z"/>
+        <path fill="#34291a" d="M0 61h103l19 13h76l18 17h83l18 18h72l20 18h88l21-16h81l22 17h83l17-18h76l21-17h81l18-18h99v57H0z"/>
+        <path fill="#49351e" d="M0 105h170l18 13h97l19 14h86l16-12h93l18 14h95l22-15h84l18 14h101l20-15h109v32H0z"/>
+        <path fill="#5a4125" d="M0 137h1200v13H0z" opacity=".65"/>
+        <g fill="#80603a"><path d="M84 54h16v8H84zM231 79h24v8h-24zM382 95h16v8h-16zM558 109h24v8h-24zM756 96h16v8h-16zM932 80h24v8h-24zM1082 55h16v8h-16z"/></g>
+        <g fill="#171710"><path d="M160 34h8v27h-8zM168 53h8v26h-8zM176 71h8v18h-8zM1025 34h8v20h-8zM1017 50h8v24h-8zM1009 68h8v15h-8z"/></g>
+        <g fill="#9a7544"><path d="M42 82h8v8h-8zM313 119h8v8h-8zM650 130h8v8h-8zM864 119h8v8h-8zM1141 91h8v8h-8z"/></g>
+        <g fill="#171710"><path d="M286 0h8v24h-8zM294 16h8v18h-8zM706 0h8v31h-8zM714 24h8v22h-8zM866 0h8v18h-8zM874 12h8v27h-8z"/></g>
+        <g fill="#b08a50"><path d="M196 99h16v8h-16zM204 107h8v8h-8zM470 121h24v8h-24zM792 112h16v8h-16zM1000 91h24v8h-24z"/></g>
+        <g class="earth-critter earth-critter--worm" transform="translate(540 62)"><path fill="#9b6844" d="M0 16h8V8h8v8h8v8h8v-8h8v-8h8v8h8v8h8v8h-8v8h-8v-8h-8v-8h-8v8h-8v8h-8v-8H8v-8H0z"/><path fill="#e0b56f" d="M8 16h8v8H8zm16 8h8v8h-8zm16-8h8v8h-8z"/><circle cx="52" cy="13" r="2" fill="#f0e4d0"/><circle cx="53" cy="13" r="1" fill="#17120d"/></g>
+      </svg>
       <div class="spine">
         <div class="notes-grid">
           <aside class="notes-rail">
@@ -66,57 +80,12 @@
                 <span class="kicker-line" aria-hidden="true"></span>
                 <span>Background</span>
               </p>
-              <h2 class="section-title">Education &amp; <em>experience.</em></h2>
-              <p class="section-note">IIT Delhi · Markets · Technical Systems</p>
-
-              <figure class="rail-fig">
-                <svg class="sprig" viewBox="0 0 200 300" aria-hidden="true" fill="none">
-                  <g stroke="currentColor" stroke-width="1.05" stroke-linecap="round">
-                    <path d="M104 292C100 250 108 208 102 168C98 136 106 106 100 76"></path>
-                    <path d="M103 254C119 232 133 208 140 176"></path>
-                    <path d="M102 230C86 208 72 190 64 160"></path>
-                    <path d="M102 284C118 270 130 260 140 246"></path>
-                  </g>
-                  <g class="sprig-leaf" stroke="currentColor" stroke-width=".9" stroke-linejoin="round">
-                    <path d="M104 246C88 246 74 238 66 224C84 222 100 230 104 246Z"></path>
-                    <path d="M104 222C120 220 134 210 140 196C122 196 108 206 104 222Z"></path>
-                    <path d="M101 196C85 194 73 184 68 170C84 170 98 180 101 196Z"></path>
-                    <path d="M101 176C115 172 126 160 130 146C114 148 103 158 101 176Z"></path>
-                    <path d="M100 150C86 146 77 136 74 124C88 126 98 136 100 150Z"></path>
-                    <path d="M102 134C114 128 121 116 122 104C108 108 101 118 102 134Z"></path>
-                    <path d="M139 200C151 198 162 190 166 178C152 178 141 186 139 200Z"></path>
-                    <path d="M65 184C55 180 48 170 47 158C59 162 66 172 65 184Z"></path>
-                    <path d="M136 240C147 236 154 226 155 214C143 218 136 228 136 240Z"></path>
-                  </g>
-                  <g class="sprig-flower">
-                    <g transform="translate(100 64)">
-                      <ellipse cx="0" cy="-16" rx="8" ry="14"></ellipse>
-                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(72)"></ellipse>
-                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(144)"></ellipse>
-                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(216)"></ellipse>
-                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(288)"></ellipse>
-                      <circle cx="0" cy="0" r="4.2" class="sprig-center"></circle>
-                    </g>
-                    <g transform="translate(140 174) scale(.62)">
-                      <ellipse cx="0" cy="-16" rx="8" ry="14"></ellipse>
-                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(72)"></ellipse>
-                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(144)"></ellipse>
-                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(216)"></ellipse>
-                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(288)"></ellipse>
-                      <circle cx="0" cy="0" r="4.2" class="sprig-center"></circle>
-                    </g>
-                    <g transform="translate(64 158) scale(.44)">
-                      <ellipse cx="0" cy="-16" rx="8" ry="14"></ellipse>
-                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(72)"></ellipse>
-                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(144)"></ellipse>
-                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(216)"></ellipse>
-                      <ellipse cx="0" cy="-16" rx="8" ry="14" transform="rotate(288)"></ellipse>
-                      <circle cx="0" cy="0" r="4.2" class="sprig-center"></circle>
-                    </g>
-                  </g>
-                </svg>
-                <figcaption>01 / Background</figcaption>
-              </figure>
+              <div class="rail-title-row">
+                <h2 class="section-title">Education &amp; <em>experience.</em></h2>
+              </div>
+              <div class="rail-note-row">
+                <p class="section-note">IIT Delhi · Markets · Technical Systems</p>
+              </div>
             </div>
           </aside>
 
@@ -159,6 +128,34 @@
     <!-- ============ ARCADE ============ -->
     <section class="section section--arcade" id="games">
       <div class="arcade-stars" aria-hidden="true"></div>
+      <svg class="earth-art earth-art--rock" viewBox="0 0 1200 170" preserveAspectRatio="none" aria-hidden="true">
+        <path fill="#171a18" d="M0 0h1200v93l-42 8-20 23h-68l-24 18h-74l-18 17H0z"/>
+        <path fill="#282d29" d="M0 0h186l22 21h55l21 24h63l21 29h64l25 22h-86l-21-14h-69l-20-21h-65l-24-23h-59L0 19z"/>
+        <path fill="#363b36" d="M418 0h125l18 18h50l22 24h59l19 20h77l26 28h-88l-18-15h-65l-21-19h-69l-20-22h-68l-18-17h-27z"/>
+        <path fill="#222623" d="M819 0h114l24 23h65l18 22h62l25 22h73v31h-85l-19-17h-63l-20-20h-69l-22-23h-78z"/>
+        <g fill="#555b54"><path d="M48 29h39v8H48zM96 45h24v8H96zM242 57h32v8h-32zM473 15h40v8h-40zM592 54h32v8h-32zM722 73h24v8h-24zM864 31h32v8h-32zM1010 56h40v8h-40zM1120 77h24v8h-24z"/></g>
+        <g fill="#111412"><path d="M320 72h32v8h-32zM653 88h40v8h-40zM930 83h24v8h-24zM111 86h24v8h-24z"/></g>
+        <g fill="#777d74"><path d="M160 16h16v8h-16zM278 36h16v8h-16zM450 36h24v8h-24zM545 14h16v8h-16zM785 46h24v8h-24zM938 14h16v8h-16zM1065 37h16v8h-16z"/></g>
+        <g fill="#0b0d0c"><path d="M178 0h8v64h-8zM186 56h8v23h-8zM382 0h8v44h-8zM390 38h8v37h-8zM776 0h8v34h-8zM784 28h8v50h-8zM1076 0h8v49h-8zM1084 43h8v37h-8z"/></g>
+        <g fill="#969b91"><path d="M507 70h8v8h-8zM746 91h8v8h-8zM891 60h8v8h-8zM104 71h8v8h-8zM1149 53h8v8h-8z"/></g>
+        <g class="earth-critter earth-critter--bat" transform="translate(548 110)" fill="#a5aaa1"><path d="M0 16l8-8 8 4 8-8 8 8 8-4 8 8-8-2-8 5-8-5-8 5z"/><path d="M17 16h14v12H17z"/><circle cx="21" cy="20" r="1.5" fill="#d6a56d"/><circle cx="27" cy="20" r="1.5" fill="#d6a56d"/></g>
+        <g class="earth-critter earth-critter--crystal" fill="#90a9ad"><path d="M100 92h8V68l8-12 8 12v24h-8V75l-4-5-4 5v17zM114 92h8V76l7-10 7 10v16h-8V79l-3-4-3 4v13z"/></g>
+      </svg>
+      <svg class="earth-art earth-art--water" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
+        <path fill="#101a1c" d="M0 0h1200v98l-50-8-45 11-54-10-44 13-65-12-49 10-55-8-50 11-62-13-50 10-61-9-46 10-70-12-47 10-65-12-51 9-65-10-50 11-70-10-60 12-61-11z"/>
+        <path fill="#203b40" d="M0 94l63-8 55 10 63-11 54 10 62-13 56 11 69-9 55 10 59-12 57 11 61-10 56 9 61-12 59 11 64-9 59 10 61-11 65 8 48-5 48 5v57H0z"/>
+        <path fill="#2c5960" d="M0 121l88-8 58 8 72-10 71 9 66-8 63 10 77-9 66 9 72-10 61 10 75-8 66 8 71-10 76 9 72-8 82 8 48-4 48 4v35H0z" opacity=".72"/>
+        <g fill="#70a2a2"><path d="M120 111h24v4h-24zM328 126h16v4h-16zM568 108h28v4h-28zM810 123h20v4h-20zM1040 109h28v4h-28z"/></g>
+        <g fill="#c5d6c5"><path d="M178 132h8v4h-8zM448 116h8v4h-8zM698 136h8v4h-8zM940 118h8v4h-8z"/></g>
+        <g class="earth-critter earth-critter--angler" transform="translate(650 92)">
+          <path fill="#101516" d="M0 35l12-12 24-9 29 5 20 14-15 17-30 8-25-7zM8 32L-8 18l5 22-8 14 22-8zM75 32l24-14-7 23 11 17-30-9z"/>
+          <path fill="#303b3c" d="M13 29l15-9 30 4 13 11-13 13-29 4-17-8z"/>
+          <path fill="#d2b173" d="M54 25l12 7-10 8-13-5z"/><path fill="#d2b173" d="M22 50l-5 15 12-11zM43 53l2 15 8-15zM63 48l11 13-3-18z"/>
+          <path fill="#c4b674" d="M43 22q0-25 18-30" stroke="#c4b674" stroke-width="3"/><path fill="#f2c45d" d="M58-12h15v15H58z"/><path fill="#fff1a6" d="M62-9h6v6h-6z"/>
+          <circle cx="28" cy="31" r="4" fill="#ec4f3c"/><circle cx="29" cy="30" r="1.5" fill="#ffe6bb"/>
+          <path fill="#e5d7ae" d="M20 43h6v8h-6zM32 46h6v8h-6zM46 46h6v8h-6zM58 42h6v8h-6z"/>
+        </g>
+      </svg>
 
       <div class="spine">
         <header class="section-head section-head--light reveal">
@@ -202,6 +199,16 @@
   <!-- ============ CONTACT / FOOTER ============ -->
   <footer class="contact" id="contact">
     <div class="contact-dots" aria-hidden="true"></div>
+    <svg class="earth-art earth-art--magma" viewBox="0 0 1200 210" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="#21130f" d="M0 0h1200v126l-48-11-22 19h-68l-24-20-31 5-21 24h-88l-29-20-39 5-20 23h-95l-25-18-35 5-23 19H0z"/>
+      <path fill="#8e2b13" d="M0 143l71-10 37 14 56-5 38 17 67-9 31 15 72-6 34 16 70-10 36 15 67-5 35 14 83-11 31 13 72-7 40 17 70-9 32 13 76-11 45 16 87-12v41H0z"/>
+      <path fill="#ed5b20" d="M0 166l78-9 45 13 59-5 42 14 68-8 30 13 83-6 34 15 75-9 42 13 62-5 41 14 80-10 36 13 80-7 42 15 77-10 44 13 82-9v18H0z"/>
+      <path fill="#ff9a38" d="M0 188l110-6 37 8 90-4 40 7 110-5 44 8 102-5 40 7 102-4 46 8 110-5 40 7 105-4 43 6 181-6v18H0z"/>
+      <g fill="#ffb650"><path d="M128 130h8v20h-8zM316 146h8v20h-8zM557 151h8v18h-8zM812 139h8v22h-8zM1024 147h8v18h-8z"/></g>
+      <g fill="#3a1911"><path d="M78 0h8v55h-8zM86 48h8v30h-8zM441 0h8v40h-8zM449 35h8v43h-8zM890 0h8v54h-8zM882 47h8v31h-8zM1112 0h8v34h-8zM1120 29h8v49h-8z"/></g>
+      <g class="earth-critter earth-critter--salamander" transform="translate(740 105)" fill="#30150f"><path d="M0 20l12-8h28l10 8-10 8H12zM0 20l-12-8v16zM14 12l-3-6h8l3 6m11 0-3-6h8l3 6"/><circle cx="35" cy="17" r="2" fill="#ffd36b"/><circle cx="35" cy="17" r=".8" fill="#2b120c"/></g>
+      <g class="earth-critter earth-critter--moth" transform="translate(260 158)" fill="#f5b24a"><path d="M12 12L0 0l4 15-4 11 12-6 12 6-4-11 4-15z"/><path d="M11 10h2v14h-2z" fill="#492016"/></g>
+    </svg>
 
     <div class="spine">
       <div class="contact-head reveal">

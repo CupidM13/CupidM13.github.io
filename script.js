@@ -292,7 +292,6 @@
         metaPair('Activities', item.activities),
         metaPair('Note', item.note),
       ].filter(Boolean).join('');
-
       const coursework = (item.coursework || [])
         .map((course) => `<span class="chip">${esc(course)}</span>`)
         .join('');
@@ -336,6 +335,9 @@
         metaPair('Engagement', item.type),
         metaPair('Period', item.years),
       ].filter(Boolean).join('');
+      const details = (item.details || [])
+        .map((detail) => `<li>${esc(detail)}</li>`)
+        .join('');
 
       return `
         <details class="entry reveal" style="--delay:${index * 70}ms">
@@ -350,6 +352,7 @@
           <div class="entry-body">
             <div class="entry-inner">
               <dl class="meta-grid">${meta}</dl>
+              ${details ? `<ul class="experience-details">${details}</ul>` : ''}
             </div>
           </div>
         </details>`;
@@ -584,10 +587,13 @@
       const scale = isMobile ? 0.68 : isTablet ? 0.92 : 1.15;
       const P = isMobile ? 2 : 2.5; // pixel unit
 
-      const groundY = Math.round(height * 0.94);
+      const treeOffset = Math.min(44, Math.round(height * 0.055));
+      const groundY = Math.round(height * 0.94) + treeOffset;
       const rootX = Math.round(width * 0.50);
       const treeH = Math.min(Math.round(height * 0.88), isMobile ? 460 : 680);
       const topY = groundY - treeH;
+      const greeting = document.querySelector('.hero-greeting');
+      if (greeting) greeting.style.top = `${Math.max(64, topY - treeOffset - 88)}px`;
 
       // Color palette (Dark Obsidian & Moss Emerald)
       const trunkColor = '#0d2217';
@@ -763,8 +769,8 @@
       if (!isMobile) drawPixelBird(tipAx + 24 * scale, yA - 6 * scale, 1);
       tipAnchors.a = { x: tipAx, y: yA };
 
-      // Branch B -> 02 Arcade (Mid right)
-      const yB = Math.round(groundY - treeH * 0.38);
+      // Branch B -> 02 Arcade (Middle right)
+      const yB = Math.round(groundY - treeH * 0.55);
       const startBx = Math.round(getTrunkX(yB) + 32 * scale);
       const tipBx = Math.round(getTrunkX(yB) + (isMobile ? 72 : 115) * scale);
       offctx.fillStyle = barkColor;
@@ -775,7 +781,7 @@
       tipAnchors.b = { x: tipBx, y: yB };
 
       // Branch C -> 03 Contact (Lower mid left)
-      const yC = Math.round(groundY - treeH * 0.55);
+      const yC = Math.round(groundY - treeH * 0.28);
       const startCx = Math.round(getTrunkX(yC) - 34 * scale);
       const tipCx = Math.round(getTrunkX(yC) - (isMobile ? 68 : 100) * scale);
       offctx.fillStyle = barkColor;
@@ -1198,7 +1204,7 @@
      PALETTE HELPERS (for canvas work)
      ============================================================ */
   function cssValue(property) {
-    return getComputedStyle(root).getPropertyValue(property).trim();
+    return getComputedStyle(gameStage || root).getPropertyValue(property).trim();
   }
 
   function palette() {
@@ -1234,12 +1240,12 @@
   const gameStage = $('gameStage');
   const arcadeStatus = $('arcadeStatus');
   const games = [
-    { id: 'neuron', name: 'Neuron lab', lab: true },
-    { id: 'mlp', name: 'Tiny MLP', lab: true },
     { id: 'snake', name: 'Snake' },
     { id: 'memory', name: 'Memory' },
+    { id: 'mlp', name: 'Tiny MLP', lab: true },
     { id: 'ttt', name: 'Tic-tac-toe' },
     { id: 'reaction', name: 'Reaction' },
+    { id: 'neuron', name: 'Neuron lab', lab: true },
     { id: 'rps', name: 'RPS' },
     { id: 'guess', name: 'Guess' },
   ];
@@ -1609,6 +1615,7 @@
       <p class="game-info">Arrow keys or WASD on desktop. Swipe or use the D-pad on mobile.</p>
       <div class="game-row">
         <span class="snake-score">Score: <span id="snakeScore">0</span></span>
+        <span class="snake-score">Best: <span id="snakeBest">0</span></span>
         <button class="game-btn primary" id="snakeStart" type="button">Start / restart</button>
       </div>
       <canvas id="snakeCanvas" class="game-canvas" width="360" height="360" aria-label="Snake game board"></canvas>
@@ -1622,13 +1629,19 @@
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     const grid = 18;
+    const stepDuration = 85;
     const cols = canvas.width / grid;
     const rows = canvas.height / grid;
     let snake;
     let direction;
     let food;
     let score;
+    let best = 0;
+    try { best = Number(window.localStorage.getItem('snakeBest')) || 0; } catch (_) { /* Storage may be unavailable. */ }
     let loop;
+    let animationFrame;
+    let previousSnake = [];
+    let lastStepAt = 0;
     let running = false;
     let over = false;
 
@@ -1649,14 +1662,15 @@
 
     function updateScore() {
       setText('snakeScore', score);
+      setText('snakeBest', best);
     }
 
-    function draw() {
+    function draw(now = performance.now()) {
       const p = palette();
       ctx.fillStyle = p.canvas;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.strokeStyle = p.line;
+      ctx.strokeStyle = rgba(p.accent, 0.045);
       ctx.lineWidth = 1;
       for (let i = 0; i <= cols; i += 1) {
         ctx.beginPath();
@@ -1671,15 +1685,72 @@
         ctx.stroke();
       }
 
+      const fx = food.x * grid;
+      const fy = food.y * grid;
+      ctx.fillStyle = p.rust;
+      ctx.beginPath();
+      ctx.arc(fx + grid / 2, fy + grid / 2 + 1, grid / 2 - 2.2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255, 224, 195, 0.3)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.fillStyle = 'rgba(255, 238, 220, 0.75)';
+      ctx.beginPath();
+      ctx.ellipse(fx + 6, fy + 6, 2, 3, -0.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = p.accent;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(fx + 9, fy + 3);
+      ctx.quadraticCurveTo(fx + 9, fy - 1, fx + 13, fy);
+      ctx.stroke();
       ctx.fillStyle = p.accent;
       ctx.beginPath();
-      ctx.arc(food.x * grid + grid / 2, food.y * grid + grid / 2, grid / 2 - 2.5, 0, Math.PI * 2);
+      ctx.ellipse(fx + 14, fy + 1, 3.5, 1.8, -0.4, 0, Math.PI * 2);
       ctx.fill();
 
-      snake.forEach((part, index) => {
-        ctx.fillStyle = index === 0 ? p.ink : rgba(p.ink, 0.45);
-        ctx.fillRect(part.x * grid + 1.5, part.y * grid + 1.5, grid - 3, grid - 3);
+      const progress = Math.min(1, Math.max(0, (now - lastStepAt) / stepDuration));
+      const points = snake.map((part, index) => {
+        const from = previousSnake[index] || part;
+        return {
+          x: (from.x + (part.x - from.x) * progress) * grid + grid / 2,
+          y: (from.y + (part.y - from.y) * progress) * grid + grid / 2,
+        };
       });
+
+      if (points.length > 1) {
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.beginPath();
+        points.forEach((point, index) => index ? ctx.lineTo(point.x, point.y) : ctx.moveTo(point.x, point.y));
+        ctx.strokeStyle = '#4b504d';
+        ctx.lineWidth = 14;
+        ctx.stroke();
+        ctx.strokeStyle = p.accent;
+        ctx.lineWidth = 10;
+        ctx.stroke();
+      }
+
+      const head = points[0];
+      ctx.fillStyle = p.accent;
+      ctx.beginPath();
+      ctx.arc(head.x, head.y, 8, 0, Math.PI * 2);
+      ctx.fill();
+      const side = { x: -direction.y, y: direction.x };
+      [1, -1].forEach((sign) => {
+        const eyeX = head.x + direction.x * 3 + side.x * 4 * sign;
+        const eyeY = head.y + direction.y * 3 + side.y * 4 * sign;
+        ctx.fillStyle = '#f8f1df';
+        ctx.beginPath();
+        ctx.arc(eyeX, eyeY, 2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#14251d';
+        ctx.beginPath();
+        ctx.arc(eyeX + direction.x, eyeY + direction.y, 0.9, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.lineCap = 'butt';
+      ctx.lineJoin = 'miter';
 
       if (over) {
         ctx.fillStyle = rgba(p.canvas, 0.84);
@@ -1696,6 +1767,7 @@
     }
 
     function step() {
+      previousSnake = snake.map((part) => ({ ...part }));
       const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
       const hitWall = head.x < 0 || head.x >= cols || head.y < 0 || head.y >= rows;
       const hitSelf = snake.some((part) => part.x === head.x && part.y === head.y);
@@ -1704,27 +1776,42 @@
         running = false;
         over = true;
         window.clearInterval(loop);
+        if (animationFrame) window.cancelAnimationFrame(animationFrame);
         draw();
         return;
       }
 
+      lastStepAt = performance.now();
       snake.unshift(head);
       if (head.x === food.x && head.y === food.y) {
         score += 1;
+        if (score > best) {
+          best = score;
+          try { window.localStorage.setItem('snakeBest', String(best)); } catch (_) { /* Storage may be unavailable. */ }
+        }
         updateScore();
         placeFood();
       } else {
         snake.pop();
       }
-      draw();
+    }
+
+    function animate(now) {
+      if (!running) return;
+      draw(now);
+      animationFrame = window.requestAnimationFrame(animate);
     }
 
     function start() {
       reset();
+      previousSnake = snake.map((part) => ({ ...part }));
+      lastStepAt = performance.now();
       draw();
       if (loop) window.clearInterval(loop);
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
       running = true;
-      loop = window.setInterval(step, 120);
+      loop = window.setInterval(step, stepDuration);
+      animationFrame = window.requestAnimationFrame(animate);
     }
 
     $('snakeStart')?.addEventListener('click', start);
@@ -2251,5 +2338,5 @@
   /* ============================================================
      BOOT THE ARCADE
      ============================================================ */
-  loadGame('neuron');
+  loadGame('snake');
 })();
