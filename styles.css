@@ -3508,7 +3508,11 @@ canvas {
   }
 
   .notes {
-    padding-block: clamp(34px, 8vw, 48px);
+    padding-block: clamp(28px, 6vw, 40px);
+  }
+
+  .notes-grid {
+    gap: 24px;
   }
 
   .section-title {
@@ -3546,7 +3550,7 @@ canvas {
   .entry-summary {
     grid-template-columns: minmax(0, 1fr) auto 16px;
     gap: 10px;
-    padding: 16px 4px;
+    padding: 12px 4px;
     margin-inline: 0;
   }
 
@@ -3572,6 +3576,30 @@ canvas {
     gap: 11px;
     padding: 16px 11px;
     margin-inline: -11px;
+  }
+
+  .cv-group--skills {
+    margin-top: 12px !important;
+  }
+
+  .cv-group--skills .skills-list {
+    gap: 5px;
+    margin-top: 8px;
+  }
+
+  .cv-group--skills .skill-row {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    padding: 5px 8px;
+    margin: 0;
+    border-radius: 12px;
+    line-height: 1.35;
+  }
+
+  .cv-group--skills .skill-name,
+  .cv-group--skills .skill-items-text {
+    font-size: 9px;
   }
 
   .arcade-screen {

@@ -10,11 +10,24 @@
   <meta property="og:description" content="AI / ML engineer from IIT Delhi. Data, markets, models and interactive labs." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0b120f" />
+  <script>
+    (function () {
+      try {
+        var navigation = performance.getEntriesByType('navigation')[0];
+        if (navigation && navigation.type === 'reload') {
+          history.scrollRestoration = 'manual';
+          window.addEventListener('pageshow', function () {
+            window.scrollTo(0, 0);
+          }, { once: true });
+        }
+      } catch (error) { /* Keep browser defaults if navigation APIs are unavailable. */ }
+    })();
+  </script>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%2312352A'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Georgia,serif' font-size='25' font-style='italic' fill='%23F1EBDA'%3ECM%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20261118-4" />
+  <link rel="stylesheet" href="styles.css?v=20261118-5" />
   <script>
     (function () {
       try {
@@ -349,6 +362,6 @@
   </div>
 
   <script src="config.js?v=20261118-1"></script>
-  <script src="script.js?v=20261118-3"></script>
+  <script src="script.js?v=20261118-4"></script>
 </body>
 </html>
