@@ -3175,6 +3175,13 @@ canvas {
 }
 
 @media (max-width: 900px) {
+  .earth-art--soil {
+    height: clamp(76px, 22vw, 125px);
+    opacity: 0.68;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 48%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 48%, transparent 100%);
+  }
+
   .hero {
     height: 100svh;
     min-height: 100svh;

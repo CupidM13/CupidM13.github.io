@@ -583,21 +583,19 @@
       const random = makeRandom(0x42f09a);
       const isMobile = width < 680;
       const isTablet = width >= 680 && width < 1140;
-      const scale = isMobile ? 0.88 : isTablet ? 0.92 : 1.15;
+      const scale = isMobile
+        ? Math.min(1.1, Math.max(0.88, width / 360))
+        : isTablet ? 0.92 : 1.15;
       const P = isMobile ? 2 : 2.5; // pixel unit
 
       const groundY = Math.round(height * 0.94);
       const rootX = Math.round(width * 0.50);
-      // Reserve a real title zone above the canopy on short desktop viewports.
-      const treeH = isMobile
-        ? Math.min(Math.round(height * 0.88), 460)
-        : Math.min(Math.round(height * 0.68), 680);
+      // Keep tree and greeting positions proportional to the hero on every screen.
+      const treeH = Math.round(height * (isMobile ? 0.76 : 0.68));
       const topY = groundY - treeH;
       const greeting = document.querySelector('.hero-greeting');
       if (greeting) {
-        const greetingTop = isMobile
-          ? Math.max(78, topY - 48)
-          : Math.max(64, topY - 88);
+        const greetingTop = topY - height * (isMobile ? 0.06 : 0.08);
         greeting.style.top = `${greetingTop}px`;
       }
 
