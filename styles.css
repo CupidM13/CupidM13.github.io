@@ -2011,10 +2011,10 @@ canvas {
 
 .game-stage {
   position: relative;
-  width: min(100%, 360px);
-  max-width: 360px;
+  width: 100%;
+  max-width: none;
   min-width: 0;
-  min-height: 470px;
+  min-height: clamp(24rem, 58vh, 34rem);
   margin-inline: auto;
 }
 
@@ -2030,8 +2030,16 @@ canvas {
 .game-stage .ttt-grid,
 .game-stage .game-canvas,
 .game-stage .reaction-box {
-  width: min(100%, 360px);
-  max-width: 360px;
+  width: min(100%, 34rem);
+  max-width: 34rem;
+  margin-inline: auto;
+}
+
+.game-stage > h3,
+.game-stage > .game-info,
+.game-stage > .game-row,
+.game-stage > .rps-choices {
+  width: min(100%, 38rem);
   margin-inline: auto;
 }
 
@@ -3391,7 +3399,7 @@ canvas {
   }
 
   .game-stage {
-    min-height: clamp(22rem, 58vh, 29rem);
+    min-height: clamp(22rem, 58vh, 34rem);
   }
 
   .lab-body {
