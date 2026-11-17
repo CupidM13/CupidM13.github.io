@@ -588,7 +588,10 @@
 
       const groundY = Math.round(height * 0.94);
       const rootX = Math.round(width * 0.50);
-      const treeH = Math.min(Math.round(height * 0.88), isMobile ? 460 : 680);
+      // Reserve a real title zone above the canopy on short desktop viewports.
+      const treeH = isMobile
+        ? Math.min(Math.round(height * 0.88), 460)
+        : Math.min(Math.round(height * 0.68), 680);
       const topY = groundY - treeH;
       const greeting = document.querySelector('.hero-greeting');
       if (greeting) {
